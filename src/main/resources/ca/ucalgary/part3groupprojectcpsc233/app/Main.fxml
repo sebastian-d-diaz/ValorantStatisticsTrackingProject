@@ -18,11 +18,11 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Open…" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Save As…" />
-                        <MenuItem mnemonicParsing="false" text="Quit" />
+                        <MenuItem fx:id="New" mnemonicParsing="false" text="New" />
+                        <MenuItem fx:id="Open" mnemonicParsing="false" text="Open…" />
+                        <MenuItem fx:id="Save" mnemonicParsing="false" text="Save" />
+                        <MenuItem fx:id="SaveAs" mnemonicParsing="false" text="Save As…" />
+                        <MenuItem fx:id="Quit" mnemonicParsing="false" text="Quit" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
