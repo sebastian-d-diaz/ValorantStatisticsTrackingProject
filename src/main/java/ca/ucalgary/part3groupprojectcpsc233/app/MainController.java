@@ -183,7 +183,7 @@ public class MainController {
         AddAssistsController controller = fxmlLoader.getController();
         controller.setData(data);
         Stage stage = new Stage();
-        stage.setTitle("Add Players Assists");
+        stage.setTitle("Add a Players Assists");
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -200,7 +200,7 @@ public class MainController {
         AddDeathsController controller = fxmlLoader.getController();
         controller.setData(data);
         Stage stage = new Stage();
-        stage.setTitle("Add Players Deaths");
+        stage.setTitle("Add a Players Deaths");
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -217,19 +217,26 @@ public class MainController {
         AddACSController controller = fxmlLoader.getController();
         controller.setData(data);
         Stage stage = new Stage();
-        stage.setTitle("Add Players ACS");
+        stage.setTitle("Add a Players ACS");
         stage.setScene(scene);
         stage.showAndWait();
     }
 
     @FXML
     void addADR(){
-        inputTitle.setText("Enter Player's Username"); //enter user name
-        //get text
-        //clear text, ask for input for ADR
-        inputTitle.setVisible(true);
-        inputToolBar.setVisible(true);
-        confirmInputButton.setVisible(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddADR.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 400, 400);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddADRController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Add a Players ACS");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
 
