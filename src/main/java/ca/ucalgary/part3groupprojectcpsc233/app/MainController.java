@@ -139,10 +139,19 @@ public class MainController {
     }
     @FXML
     void addPlayer(){
-        inputTitle.setText("Enter Player's Username");
-        inputTitle.setVisible(true);
-        inputToolBar.setVisible(true);
-        confirmInputButton.setVisible(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 400, 400);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddPlayerController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Add New Player");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     @FXML
