@@ -1,13 +1,18 @@
 package ca.ucalgary.part3groupprojectcpsc233.app;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.IOException;
 
 import ca.ucalgary.part3groupprojectcpsc233.Data;
+import javafx.stage.Stage;
+
 public class MainController {
 
     //Objects facilitating communication with rest of program
@@ -117,11 +122,20 @@ public class MainController {
     }
 
     @FXML
-    void addPerson() {
-        inputTitle.setText("Enter Player's Username");
-        inputTitle.setVisible(true);
-        inputToolBar.setVisible(true);
-        confirmInputButton.setVisible(true);
+    void addPerson() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPerson.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 400, 400);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddPersonController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Add New Person");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
     @FXML
     void addPlayer(){
