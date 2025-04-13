@@ -9,13 +9,14 @@ import javafx.scene.control.TextField;
 public class AddADRController {
 
     @FXML
-    private Label acs;
-
-    @FXML
     private TextField adr;
 
     @FXML
     private TextField name;
+
+    @FXML
+    private Label status;
+
     private Data data;
 
     public void setData(Data data) {
@@ -26,7 +27,13 @@ public class AddADRController {
     void add(ActionEvent event) {
         String username = name.getText();
         int numADR = Integer.parseInt(adr.getText());
-        data.storeACSToPlayer(username,numADR);
+        boolean success = data.storeADRToPlayer(username,numADR);
+        if (!success){
+            status.setText("No player found with username.");
+        }
+        else{
+            status.setText("Success!");
+        }
     }
 
 }

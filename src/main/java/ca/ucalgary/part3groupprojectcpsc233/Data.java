@@ -179,17 +179,16 @@ public class Data {
      * @param username username of Player
      * @param kills the amount of kills user wishes to set it to
      */
-    public void storeKillsToPlayer(String username, int kills) {
+    public boolean storeKillsToPlayer(String username, int kills) {
         Player player = querySpecificPlayer(username);
         if (player == null) {
-            System.out.printf("%s does not exist. Stats not stored\n", username);
-            return;
+            return false;
         }
         if (kills < 0) {
             kills = 0;
         }
         player.setKills(kills);
-        System.out.println("Stored");
+        return true;
     }
 
     /**
@@ -198,17 +197,16 @@ public class Data {
      * @param username username of Player
      * @param assists the amount of assists user wishes to set it to
      */
-    public void storeAssistsToPlayer(String username, int assists) {
+    public boolean storeAssistsToPlayer(String username, int assists) {
         Player player = querySpecificPlayer(username);
         if (player == null) {
-            System.out.printf("%s does not exist. Stats not stored\n", username);
-            return;
+            return false;
         }
         if (assists < 0) {
             assists = 0;
         }
         player.setAssists(assists);
-        System.out.println("Stored");
+       return true;
     }
 
     /**
@@ -217,17 +215,16 @@ public class Data {
      * @param username username of Player
      * @param deaths the amount of deaths user wishes to set it to
      */
-    public void storeDeathsToPlayer(String username, int deaths) {
+    public boolean storeDeathsToPlayer(String username, int deaths) {
         Player player = querySpecificPlayer(username);
         if (player == null) {
-            System.out.printf("%s does not exist. Stats not stored\n", username);
-            return;
+            return false;
         }
         if (deaths < 0) {
             deaths = 0;
         }
         player.setDeaths(deaths);
-        System.out.println("Stored");
+        return true;
     }
 
     /**
@@ -236,17 +233,16 @@ public class Data {
      * @param username username of Player
      * @param acs ACS user wants to set it to
      */
-    public void storeACSToPlayer(String username, int acs) {
+    public boolean storeACSToPlayer(String username, int acs) {
         Player player = querySpecificPlayer(username);
         if (player == null) {
-            System.out.printf("%s does not exist. Stats not stored\n", username);
-            return;
+            return false;
         }
         if (acs < 0) {
             acs = 0;
         }
         player.setAcs(acs);
-        System.out.println("Stored");
+        return true;
     }
 
     /**
@@ -255,17 +251,16 @@ public class Data {
      * @param username username of Player
      * @param adr ADR user wants to set it to
      */
-    public void storeADRToPlayer(String username, int adr) {
+    public boolean storeADRToPlayer(String username, int adr) {
         Player player = querySpecificPlayer(username);
         if (player == null) {
-            System.out.printf("%s does not exist. Stats not stored\n", username);
-            return;
+            return false;
         }
         if (adr < 0) {
             adr = 0;
         }
         player.setAdr(adr);
-        System.out.println("Stored");
+        return true;
     }
 
     /**

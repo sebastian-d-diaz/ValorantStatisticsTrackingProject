@@ -2,6 +2,7 @@ package ca.ucalgary.part3groupprojectcpsc233.app;
 
 import ca.ucalgary.part3groupprojectcpsc233.enums.Nationality;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Person;
+import ca.ucalgary.part3groupprojectcpsc233.objects.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -45,6 +46,7 @@ public class MainController {
     @FXML
     private Button confirmInputButton;
 
+    @FXML
     private Label labelViewing;
 
     @FXML
@@ -74,10 +76,13 @@ public class MainController {
     @FXML
     private ToolBar inputToolBar;
 
+    private boolean viewingPerson;
+
     public void initialize() {
         inputTitle.setVisible(false);
         inputToolBar.setVisible(false);
         data = new Data();
+        viewingPerson = true;
     }
 
     @FXML
@@ -127,7 +132,16 @@ public class MainController {
 
 
     void refreshPersonFields(){
+        if (!viewingPerson){
+            return;
+        }
+
         ArrayList<Person> canadians = data.findPeopleWithNationality("Canada");
+        if (canadians == null){
+            labelStatus.setText("No people found in database.");
+            return;
+        }
+
         textAreaCanada.setText("");
         for (Person person : canadians){
             textAreaCanada.appendText(person.toString() + "\n");
@@ -186,12 +200,70 @@ public class MainController {
         stage.showAndWait();
         refreshPersonFields();
     }
+
+    @FXML
+    void changeMainViewToPeople(){
+        viewingPerson = true;
+        labelViewing.setText("Viewing: People");
+        refreshPersonFields();
+    }
+
+    @FXML
+    void changeMainViewToPlayers(){
+        viewingPerson = false;
+        labelViewing.setText("Viewing: Players");
+        refreshPlayerFields();
+    }
+
+
+    void refreshPlayerFields(){
+        if (viewingPerson){
+            return;
+        }
+
+        ArrayList<Player> allPlayers = data.queryAllPlayers();
+
+        if (allPlayers == null){
+            labelStatus.setText("No players found");
+            return;
+        }
+
+        textAreaCanada.setText("");
+        textAreaArgentina.setText("");
+        textAreaBrazil.setText("");
+        textAreaAsia.setText("");
+
+        for (Player player : allPlayers){
+            if (player.getNationality() == Nationality.CAN){
+                textAreaCanada.appendText(player.toString() + "\n");
+            }
+            else if (player.getNationality() == Nationality.ARG){
+                textAreaArgentina.appendText(player.toString() + "\n");
+            }
+            else if (player.getNationality() == Nationality.BRA){
+                textAreaBrazil.appendText(player.toString() + "\n");
+            }
+            else if (player.getNationality() == Nationality.ASIA){
+                textAreaAsia.appendText(player.toString() + "\n");
+            }
+            else if (player.getNationality() == Nationality.CHILE){
+                textAreaChile.setText(player.toString() + "\n");
+            }
+            else if (player.getNationality() == Nationality.USA){
+                textAreaUSA.setText(player.toString() + "\n");
+            }
+            else if (player.getNationality() == Nationality.EURO){
+                textAreaEurope.setText(player.toString() + "\n");
+            }
+        }
+    }
+
     @FXML
     void addPlayer(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 400, 400);
+            scene = new Scene(fxmlLoader.load(), 241, 246);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -201,7 +273,6 @@ public class MainController {
         stage.setTitle("Add New Player");
         stage.setScene(scene);
         stage.showAndWait();
-        refreshPersonFields();
     }
 
     @FXML
@@ -209,7 +280,7 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddKills.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 400, 400);
+            scene = new Scene(fxmlLoader.load(), 262, 309);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -219,6 +290,7 @@ public class MainController {
         stage.setTitle("Add a Players Kills");
         stage.setScene(scene);
         stage.showAndWait();
+        refreshPlayerFields();
     }
 
     @FXML
@@ -226,7 +298,7 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddAssists.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 400, 400);
+            scene = new Scene(fxmlLoader.load(), 262, 309);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -236,6 +308,7 @@ public class MainController {
         stage.setTitle("Add a Players Assists");
         stage.setScene(scene);
         stage.showAndWait();
+        refreshPlayerFields();
     }
 
     @FXML
@@ -243,7 +316,7 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddDeaths.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 400, 400);
+            scene = new Scene(fxmlLoader.load(), 262, 309);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -253,6 +326,7 @@ public class MainController {
         stage.setTitle("Add a Players Deaths");
         stage.setScene(scene);
         stage.showAndWait();
+        refreshPlayerFields();
     }
 
     @FXML
@@ -260,7 +334,7 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddACS.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 400, 400);
+            scene = new Scene(fxmlLoader.load(), 262, 309);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -270,6 +344,7 @@ public class MainController {
         stage.setTitle("Add a Players ACS");
         stage.setScene(scene);
         stage.showAndWait();
+        refreshPlayerFields();
     }
 
     @FXML
@@ -277,16 +352,17 @@ public class MainController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddADR.fxml"));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 400, 400);
+            scene = new Scene(fxmlLoader.load(), 262, 309);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         AddADRController controller = fxmlLoader.getController();
         controller.setData(data);
         Stage stage = new Stage();
-        stage.setTitle("Add a Players ACS");
+        stage.setTitle("Add a Players ADR");
         stage.setScene(scene);
         stage.showAndWait();
+        refreshPlayerFields();
     }
 
 

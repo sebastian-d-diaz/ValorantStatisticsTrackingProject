@@ -4,6 +4,7 @@ import ca.ucalgary.part3groupprojectcpsc233.Data;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class AddKillsController {
@@ -13,6 +14,9 @@ public class AddKillsController {
 
     @FXML
     private TextField name;
+
+    @FXML
+    private Label label;
 
     private Data data;
     public void setData(Data data) {
@@ -24,7 +28,14 @@ public class AddKillsController {
     void add(ActionEvent event) {
         String username = name.getText();
         int numKills = Integer.parseInt(kills.getText());
-        data.storeKillsToPlayer(username,numKills);
+        boolean success = data.storeKillsToPlayer(username,numKills);
+
+        if (!success){
+            label.setText("No player found.");
+        }
+        else{
+            label.setText("Success!");
+        }
     }
 
 }

@@ -5,12 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="262.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.part3groupprojectcpsc233.app.AddDeathsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="309.0" prefWidth="262.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.part3groupprojectcpsc233.app.AddDeathsController">
    <children>
       <Label prefHeight="29.0" prefWidth="337.0" text="Name" />
       <TextField fx:id="name" />
       <Label text="Deaths" />
       <TextField fx:id="deaths" />
       <Button mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="731.0" text="Add" />
+      <Label fx:id="status" alignment="BOTTOM_RIGHT" prefHeight="174.0" prefWidth="251.0" text="Status" />
    </children>
 </VBox>
