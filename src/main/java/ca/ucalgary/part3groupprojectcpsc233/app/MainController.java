@@ -173,12 +173,19 @@ public class MainController {
 
     @FXML
     void addAssists(){
-        inputTitle.setText("Enter Player's Username"); //enter user name
-        //get text
-        //clear text, ask for input for Assists
-        inputTitle.setVisible(true);
-        inputToolBar.setVisible(true);
-        confirmInputButton.setVisible(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddAssists.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 400, 400);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddAssistsController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Add New Person");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     @FXML
