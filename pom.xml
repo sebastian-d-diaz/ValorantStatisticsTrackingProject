@@ -67,7 +67,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                ca.ucalgary.part3groupprojectcpsc233/ca.ucalgary.part3groupprojectcpsc233.HelloApplication
+                                ca.ucalgary.part3groupprojectcpsc233/ca.ucalgary.part3groupprojectcpsc233.app.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
