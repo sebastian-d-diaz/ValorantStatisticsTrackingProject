@@ -1,10 +1,7 @@
 package ca.ucalgary.part3groupprojectcpsc233.app;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
@@ -23,6 +20,15 @@ public class MainController {
     private MenuItem SaveAs;
     @FXML
     private MenuItem Quit;
+
+    @FXML
+    private TextField inputBox;
+
+    @FXML
+    private Text inputTitle;
+
+    @FXML
+    private Button confirmInputButton;
 
     private Label labelViewing;
 
@@ -49,6 +55,14 @@ public class MainController {
 
     @FXML
     private TextArea textAreaChile;
+
+    @FXML
+    private ToolBar inputToolBar;
+
+    public void initialize() {
+        inputTitle.setVisible(false);
+        inputToolBar.setVisible(false);
+    }
 
     @FXML
     protected void new_MenuItem(){
@@ -84,5 +98,71 @@ public class MainController {
                 "daniel.zhang2@ucalgary.ca\nbrian.chhan@ucalgary.ca\n\nVersion: 3.0\n This is a Valorant eSports Statistics Tracker");
         alert.show();
     }
+
+    @FXML
+    void addPerson() {
+        inputTitle.setText("Enter Player's Username");
+        inputTitle.setVisible(true);
+        inputToolBar.setVisible(true);
+        confirmInputButton.setVisible(true);
+    }
+    @FXML
+    void addPlayer(){
+        inputTitle.setText("Enter Player's Username");
+        inputTitle.setVisible(true);
+        inputToolBar.setVisible(true);
+        confirmInputButton.setVisible(true);
+    }
+
+    @FXML
+    void addKills(){
+        inputTitle.setText("Enter Player's Username"); //enter user name
+        //get text
+        //clear text, ask for input for kills
+        inputTitle.setVisible(true);
+        inputToolBar.setVisible(true);
+        confirmInputButton.setVisible(true);
+    }
+
+    @FXML
+    void addAssists(){
+        inputTitle.setText("Enter Player's Username"); //enter user name
+        //get text
+        //clear text, ask for input for Assists
+        inputTitle.setVisible(true);
+        inputToolBar.setVisible(true);
+        confirmInputButton.setVisible(true);
+    }
+
+    @FXML
+    void addDeaths(){
+        inputTitle.setText("Enter Player's Username"); //enter user name
+        //get text
+        //clear text, ask for input for deaths
+        inputTitle.setVisible(true);
+        inputToolBar.setVisible(true);
+        confirmInputButton.setVisible(true);
+    }
+
+    @FXML
+    void addACS(){
+        inputTitle.setText("Enter Player's Username"); //enter user name
+        //get text
+        //clear text, ask for input for Acs
+        inputTitle.setVisible(true);
+        inputToolBar.setVisible(true);
+        confirmInputButton.setVisible(true);
+    }
+
+    @FXML
+    void addADR(){
+        inputTitle.setText("Enter Player's Username"); //enter user name
+        //get text
+        //clear text, ask for input for ADR
+        inputTitle.setVisible(true);
+        inputToolBar.setVisible(true);
+        confirmInputButton.setVisible(true);
+    }
+
 
 }
