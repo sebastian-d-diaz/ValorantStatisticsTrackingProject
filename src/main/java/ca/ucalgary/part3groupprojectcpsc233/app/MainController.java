@@ -166,7 +166,7 @@ public class MainController {
         AddKillsController controller = fxmlLoader.getController();
         controller.setData(data);
         Stage stage = new Stage();
-        stage.setTitle("Add New Person");
+        stage.setTitle("Add a Players Kills");
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -183,19 +183,26 @@ public class MainController {
         AddAssistsController controller = fxmlLoader.getController();
         controller.setData(data);
         Stage stage = new Stage();
-        stage.setTitle("Add New Person");
+        stage.setTitle("Add Players Assists");
         stage.setScene(scene);
         stage.showAndWait();
     }
 
     @FXML
     void addDeaths(){
-        inputTitle.setText("Enter Player's Username"); //enter user name
-        //get text
-        //clear text, ask for input for deaths
-        inputTitle.setVisible(true);
-        inputToolBar.setVisible(true);
-        confirmInputButton.setVisible(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddDeaths.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 400, 400);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddDeathsController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Add Players Deaths");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     @FXML
