@@ -9,14 +9,15 @@ import javafx.scene.control.TextField;
 public class AddACSController {
 
     @FXML
-    private Label acs;
+    private TextField acs;
 
     @FXML
-    private TextField kills;
+    private Label label;
 
     @FXML
     private TextField name;
     private Data data;
+
 
     public void setData(Data data) {
         this.data = data;
@@ -26,7 +27,16 @@ public class AddACSController {
     void add(ActionEvent event) {
         String username = name.getText();
         int numACS = Integer.parseInt(acs.getText());
-        data.storeACSToPlayer(username,numACS);
+        boolean success = data.storeACSToPlayer(username,numACS);
+
+        if (!success){
+            label.setText("No player found.");
+        }
+        else{
+            label.setText("Success!");
+        }
+
+
     }
 
 }
