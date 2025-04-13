@@ -207,12 +207,19 @@ public class MainController {
 
     @FXML
     void addACS(){
-        inputTitle.setText("Enter Player's Username"); //enter user name
-        //get text
-        //clear text, ask for input for Acs
-        inputTitle.setVisible(true);
-        inputToolBar.setVisible(true);
-        confirmInputButton.setVisible(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddACS.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 400, 400);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddACSController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Add Players ACS");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     @FXML
