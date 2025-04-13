@@ -1,5 +1,7 @@
 package ca.ucalgary.part3groupprojectcpsc233.app;
 
+import ca.ucalgary.part3groupprojectcpsc233.enums.Nationality;
+import ca.ucalgary.part3groupprojectcpsc233.objects.Person;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +11,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import ca.ucalgary.part3groupprojectcpsc233.Data;
 import javafx.stage.Stage;
@@ -74,6 +77,7 @@ public class MainController {
     public void initialize() {
         inputTitle.setVisible(false);
         inputToolBar.setVisible(false);
+        data = new Data();
     }
 
     @FXML
@@ -121,6 +125,50 @@ public class MainController {
         alert.show();
     }
 
+
+    void refreshPersonFields(){
+        ArrayList<Person> canadians = data.findPeopleWithNationality("Canada");
+        textAreaCanada.setText("");
+        for (Person person : canadians){
+            textAreaCanada.appendText(person.toString() + "\n");
+        }
+
+        ArrayList<Person> americans = data.findPeopleWithNationality("USA");
+        textAreaUSA.setText("");
+        for (Person person : americans){
+            textAreaUSA.appendText(person.toString() + "\n");
+        }
+
+        ArrayList<Person> brazilians = data.findPeopleWithNationality("brazil");
+        textAreaBrazil.setText("");
+        for (Person person : brazilians){
+            textAreaBrazil.appendText(person.toString() + "\n");
+        }
+
+        ArrayList<Person> chile = data.findPeopleWithNationality("chile");
+        textAreaChile.setText("");
+        for (Person person : chile){
+            textAreaChile.appendText(person.toString() + "\n");
+        }
+
+        ArrayList<Person> europeans = data.findPeopleWithNationality("europe");
+        textAreaEurope.setText("");
+        for (Person person : europeans){
+            textAreaEurope.appendText(person.toString() + "\n");
+        }
+
+        ArrayList<Person> argentineans = data.findPeopleWithNationality("argentina");
+        textAreaArgentina.setText("");
+        for (Person person : argentineans){
+            textAreaArgentina.appendText(person.toString() + "\n");
+        }
+
+        ArrayList<Person> asians = data.findPeopleWithNationality("asia");
+        textAreaAsia.setText("");
+        for (Person person : asians){
+            textAreaAsia.appendText(person.toString() + "\n");
+        }
+    }
     @FXML
     void addPerson() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPerson.fxml"));
@@ -136,6 +184,7 @@ public class MainController {
         stage.setTitle("Add New Person");
         stage.setScene(scene);
         stage.showAndWait();
+        refreshPersonFields();
     }
     @FXML
     void addPlayer(){
@@ -152,6 +201,7 @@ public class MainController {
         stage.setTitle("Add New Player");
         stage.setScene(scene);
         stage.showAndWait();
+        refreshPersonFields();
     }
 
     @FXML
