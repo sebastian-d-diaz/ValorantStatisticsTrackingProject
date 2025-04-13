@@ -7,9 +7,16 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
+import ca.ucalgary.part3groupprojectcpsc233.Data;
 public class MainController {
 
-
+    //Objects facilitating communication with rest of program
+    private Data data;
+    //setters
+    public void setData(Data data){
+        this.data=data;
+    }
+    //File MenuItems
     @FXML
     private MenuItem New;
     @FXML
@@ -66,7 +73,7 @@ public class MainController {
 
     @FXML
     protected void new_MenuItem(){
-        //Add clear methods in Data first
+        data.reset();
     }
     @FXML
     protected void open_MenuItem(){
@@ -74,7 +81,17 @@ public class MainController {
         fc.setTitle("Open file");
         File file = fc.showOpenDialog(Open.getParentPopup().getOwnerWindow());
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All files (*.cvs)", "*.cvs");
-        fileChooser.getExtensionFilters().add(extFilter);
+        fc.getExtensionFilters().add(extFilter);
+        //Non-null file case comes first as this is assumed to be the most common case
+        if(file!=null){
+            labelStatus.setLayoutX(750.0);
+            labelStatus.setText("File Loaded Successfully :)");
+        }
+        //If some issue occurred
+        else{
+            labelStatus.setLayoutX(760.0);
+            labelStatus.setText("Unable to Load File :(");
+        }
 
     }
     @FXML
