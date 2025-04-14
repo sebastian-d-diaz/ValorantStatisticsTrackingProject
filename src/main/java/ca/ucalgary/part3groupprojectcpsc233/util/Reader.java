@@ -27,6 +27,129 @@ public class Reader {
     public static final int INDEX_PLAYER4 = 4;
     public static final int INDEX_PLAYER5 = 5;
 
+    public static boolean GUIsave(Data data, File file){
+        FileWriter fw = null;
+        BufferedWriter bfw = null;
+        try{
+            fw = new FileWriter(file);
+            bfw = new BufferedWriter(fw);
+            //saving people
+            ArrayList<Person> people = data.queryAllPersons();
+            bfw.write(data.queryAllPersons().size()+"\n");//Number of people
+            for(Person person:people){
+                bfw.write(person.getUsername()+","+String.valueOf(person.getNationality())+","+person.getAge()+"\n");//"username,nationality,age\n" for each person
+            }
+            //saving Players
+            ArrayList<Player> players = data.queryAllPlayers();
+            bfw.write(players.size()+"\n");//Number of players
+            for(Player player:players){
+                bfw.write(player.getUsername()+","+player.getAge()+","+player.getKills()+","+player.getAssists()+","+player.getDeaths()+","+player.getAcs()+","+player.getAdr()+"\n");//"username,age,kills,assists,deaths,acs,adr\n"
+            }
+            //Saving Teams
+            ArrayList<Team> teams = data.queryAllTeams();
+            bfw.write(teams.size()+"\n");//number of teams
+            for(Team team:teams){
+                bfw.write(team.getTeamName()+",");//writing team name, note a newline character is not present here
+                ArrayList<Player> playersOnTeam = team.getTeamMembers();
+                String usernameP1 = playersOnTeam.get(INDEX_PLAYER1).getUsername();
+                String usernameP2 = playersOnTeam.get(INDEX_PLAYER2).getUsername();
+                String usernameP3 = playersOnTeam.get(INDEX_PLAYER3).getUsername();
+                String usernameP4 = playersOnTeam.get(INDEX_PLAYER4).getUsername();
+                String usernameP5 = playersOnTeam.get(INDEX_PLAYER5).getUsername();
+                bfw.write(usernameP1+","+usernameP2+","+usernameP3+","+usernameP4+","+usernameP5+"\n");
+            }
+
+
+        }catch(IOException e){
+            return false;
+        }
+        finally{
+            try{
+                fw.close();
+                bfw.close();
+            }catch(IOException e){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean GUIload(Data data, File file) {
+        FileReader fr = null;
+        BufferedReader bfr = null;
+        try {
+            fr = new FileReader(file);
+            bfr = new BufferedReader(fr);
+            //clearing existing data
+            data.reset();
+            //Loading people data, may be buggy
+            String line=(bfr.readLine());
+            int popoulationSize = Integer.parseInt(line);
+            //Loading all people
+            for(int pe=0;pe<popoulationSize;pe++){
+                line=bfr.readLine();
+                String[] splitLine=line.split(",");
+                String name = splitLine[INDEX_NAME];
+                String nationalityString = splitLine[INDEX_NATIONALITY];
+                Nationality nationality = Nationality.getNationality(nationalityString); //convert string nationality into an enum
+                int age = Integer.parseInt(splitLine[INDEX_AGE]);
+                Person person = new Person(name, nationality, age); //create the person object
+                data.storePersonFromFile(person); //store that person into the database
+            }
+            //Loading players
+            line = bfr.readLine();
+            int playerCount = Integer.parseInt(line);
+            for(int pl=0;pl<playerCount;pl++){
+                line = bfr.readLine();
+                String[] splitLine = line.split(",");
+                Person person = data.queryAllPersons().get(pl);
+                data.storeNewPlayer(person);
+                //loading stats
+                String name = splitLine[INDEX_NAME];
+                Nationality nationality = Nationality.getNationality(splitLine[INDEX_NATIONALITY]);
+                int age = Integer.parseInt(splitLine[INDEX_AGE]);
+                int kills = Integer.parseInt(splitLine[INDEX_KILLS]);
+                int assists = Integer.parseInt(splitLine[INDEX_ASSISTS]);
+                int deaths = Integer.parseInt(splitLine[INDEX_DEATHS]);
+                int acs = Integer.parseInt(splitLine[INDEX_ACS]);
+                int adr = Integer.parseInt(splitLine[INDEX_ADR]);
+                Player player = new Player(name, nationality, age, kills, assists, deaths, acs, adr);
+                data.storePlayerFromFile(player);
+            }
+            //loading teams
+            line = bfr.readLine();
+            int teamCount = Integer.parseInt(line);
+            for(int t=0;t<teamCount;t++){
+                line = bfr.readLine();
+                String[] splitLine = line.split(",");
+                String teamName = splitLine[INDEX_TEAMNAME];
+                String player1 = splitLine[INDEX_PLAYER1];
+                String player2 = splitLine[INDEX_PLAYER2];
+                String player3 = splitLine[INDEX_PLAYER3];
+                String player4 = splitLine[INDEX_PLAYER4];
+                String player5 = splitLine[INDEX_PLAYER5];
+                ArrayList players = new ArrayList();
+                players.add(data.querySpecificPlayer(player1));
+                players.add(data.querySpecificPlayer(player2));
+                players.add(data.querySpecificPlayer(player3));
+                players.add(data.querySpecificPlayer(player4));
+                players.add(data.querySpecificPlayer(player5));
+                Team team = new Team(teamName, players);
+                data.storeTeamFromFile(team);
+            }
+
+        } catch (IOException e) {
+            return false;
+        } finally {
+            try {
+                fr.close();
+                bfr.close();
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Initiate saving process for all files

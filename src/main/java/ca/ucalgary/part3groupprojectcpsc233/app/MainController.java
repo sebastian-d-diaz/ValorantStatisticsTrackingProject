@@ -3,6 +3,8 @@ package ca.ucalgary.part3groupprojectcpsc233.app;
 import ca.ucalgary.part3groupprojectcpsc233.enums.Nationality;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Person;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Player;
+import ca.ucalgary.part3groupprojectcpsc233.util.Reader;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -88,16 +90,19 @@ public class MainController {
     @FXML
     protected void new_MenuItem(){
         data.reset();
+        //labelStatus.setLayoutX(750.0);
+        labelStatus.setText("Created New File");
     }
     @FXML
     protected void open_MenuItem(){
         FileChooser fc = new FileChooser();
         fc.setTitle("Open file");
         File file = fc.showOpenDialog(Open.getParentPopup().getOwnerWindow());
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All files (*.cvs)", "*.cvs");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All files (*.csv)", "*.csv");
         fc.getExtensionFilters().add(extFilter);
         //Non-null file case comes first as this is assumed to be the most common case
         if(file!=null){
+            Reader.GUIload(data,file);
             labelStatus.setLayoutX(750.0);
             labelStatus.setText("File Loaded Successfully :)");
         }
@@ -118,7 +123,7 @@ public class MainController {
     }
     @FXML
     protected void quit_MenuItem(){
-
+        Platform.exit();
     }
     @FXML
     void aboutPopup(){

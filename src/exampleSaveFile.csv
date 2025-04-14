@@ -1,0 +1,14 @@
+5
+Person1,USA,69
+Person2,Chile,20
+Person3,Europe,21
+Person4,Chile,22
+Person5,Chile,23
+5
+Person1,USA,69,1,2,3,4,5
+Person2,Chile,20,2,3,4,5,6
+Person3,Europe,21,3,4,5,6,7
+Person4,Chile,22,4,5,6,7,8
+Person5,Chile,23,5,6,7,8,9
+1
+AwesomeTeam,Person1,Person2,Person3,Person4,Person5
