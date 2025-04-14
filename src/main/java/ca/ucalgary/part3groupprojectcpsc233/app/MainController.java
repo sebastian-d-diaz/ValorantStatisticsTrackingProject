@@ -240,25 +240,25 @@ public class MainController {
 
         for (Player player : allPlayers){
             if (player.getNationality() == Nationality.CAN){
-                textAreaCanada.appendText(player.toString() + "\n");
+                textAreaCanada.appendText(player + "\n");
             }
             else if (player.getNationality() == Nationality.ARG){
-                textAreaArgentina.appendText(player.toString() + "\n");
+                textAreaArgentina.appendText(player + "\n");
             }
             else if (player.getNationality() == Nationality.BRA){
-                textAreaBrazil.appendText(player.toString() + "\n");
+                textAreaBrazil.appendText(player + "\n");
             }
             else if (player.getNationality() == Nationality.ASIA){
-                textAreaAsia.appendText(player.toString() + "\n");
+                textAreaAsia.appendText(player + "\n");
             }
             else if (player.getNationality() == Nationality.CHILE){
-                textAreaChile.setText(player.toString() + "\n");
+                textAreaChile.setText(player + "\n");
             }
             else if (player.getNationality() == Nationality.USA){
-                textAreaUSA.setText(player.toString() + "\n");
+                textAreaUSA.setText(player + "\n");
             }
             else if (player.getNationality() == Nationality.EURO){
-                textAreaEurope.setText(player.toString() + "\n");
+                textAreaEurope.setText(player + "\n");
             }
         }
     }

@@ -170,7 +170,9 @@ public class Player extends Person implements Comparable<Player>{
      */
     @Override
     public String toString() {
-        return String.format("%s\n\tACS %d\tNationality: %s\tKills: %d\tAssists: %d", getUsername(), acs, getNationality(), kills, assists);
+        return String.format("User: %-15s ACS: %-4d Nationality: %-12s Kills: %-4d Assists: %-4d Deaths: %-4d ADR: %-4d",
+                getUsername().trim(), acs, getNationality(), kills, assists, deaths, adr);
+
 
     }
 

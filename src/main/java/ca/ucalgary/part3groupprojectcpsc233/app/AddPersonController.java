@@ -27,7 +27,7 @@ public class AddPersonController {
 
     @FXML
     void add(ActionEvent event) {
-        String username = name.getText();
+        String username = name.getText().stripTrailing();
         Nationality nat = getNationality(nationality.getText());
         int personAge = Integer.parseInt(age.getText());//add error checking after
         data.storeNewPerson(username,nat,personAge);
