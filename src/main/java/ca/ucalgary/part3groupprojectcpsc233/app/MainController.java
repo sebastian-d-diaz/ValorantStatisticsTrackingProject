@@ -97,14 +97,20 @@ public class MainController {
     private File saveFile = null;
     @FXML
     protected void new_MenuItem(){
+        //Wiping saveFile path
+        saveFile=null;
         data.reset();
-        //labelStatus.setLayoutX(750.0);
+        //refreshing
+        labelStatus.setLayoutX(800.0);
         labelStatus.setText("Created New File");
+        //refreshing
+        refreshPlayerFields();
+        refreshPersonFields();
+
     }
     @FXML
     protected void open_MenuItem(){
-
-        //unable to open directory
+        //unable to open default directory
         if(!initialDirectory.isDirectory()){
             initialDirectory = new File(System.getProperty("c:/"));
             fileChooser.setInitialDirectory(initialDirectory);
@@ -117,6 +123,7 @@ public class MainController {
         //Non-null file case comes first as this is assumed to be the most common case
         if(file!=null){
             Reader.GUIload(data,file);
+            saveFile=file;
             labelStatus.setLayoutX(750.0);
             labelStatus.setText("File Loaded Successfully :)");
         }
@@ -209,50 +216,52 @@ public class MainController {
         if (!viewingPerson){
             return;
         }
+        //wiping
+        textAreaCanada.setText("");
+        textAreaUSA.setText("");
+        textAreaBrazil.setText("");
+        textAreaChile.setText("");
+        textAreaEurope.setText("");
+        textAreaArgentina.setText("");
+        textAreaAsia.setText("");
 
         ArrayList<Person> canadians = data.findPeopleWithNationality("Canada");
         if (canadians == null){
+            labelStatus.setLayoutX(740.0);
             labelStatus.setText("No people found in database.");
             return;
         }
 
-        textAreaCanada.setText("");
         for (Person person : canadians){
             textAreaCanada.appendText(person.toString() + "\n");
         }
 
         ArrayList<Person> americans = data.findPeopleWithNationality("USA");
-        textAreaUSA.setText("");
         for (Person person : americans){
             textAreaUSA.appendText(person.toString() + "\n");
         }
 
         ArrayList<Person> brazilians = data.findPeopleWithNationality("brazil");
-        textAreaBrazil.setText("");
         for (Person person : brazilians){
             textAreaBrazil.appendText(person.toString() + "\n");
         }
 
         ArrayList<Person> chile = data.findPeopleWithNationality("chile");
-        textAreaChile.setText("");
         for (Person person : chile){
             textAreaChile.appendText(person.toString() + "\n");
         }
 
         ArrayList<Person> europeans = data.findPeopleWithNationality("europe");
-        textAreaEurope.setText("");
         for (Person person : europeans){
             textAreaEurope.appendText(person.toString() + "\n");
         }
 
         ArrayList<Person> argentineans = data.findPeopleWithNationality("argentina");
-        textAreaArgentina.setText("");
         for (Person person : argentineans){
             textAreaArgentina.appendText(person.toString() + "\n");
         }
 
         ArrayList<Person> asians = data.findPeopleWithNationality("asia");
-        textAreaAsia.setText("");
         for (Person person : asians){
             textAreaAsia.appendText(person.toString() + "\n");
         }
@@ -301,11 +310,15 @@ public class MainController {
             labelStatus.setText("No players found");
             return;
         }
-
+        //wiping
         textAreaCanada.setText("");
         textAreaArgentina.setText("");
         textAreaBrazil.setText("");
         textAreaAsia.setText("");
+        textAreaChile.setText("");
+        textAreaUSA.setText("");
+        textAreaEurope.setText("");
+
 
         for (Player player : allPlayers){
             if (player.getNationality() == Nationality.CAN){
