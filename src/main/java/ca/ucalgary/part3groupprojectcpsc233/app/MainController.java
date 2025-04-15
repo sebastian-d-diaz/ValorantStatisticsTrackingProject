@@ -1,5 +1,8 @@
 package ca.ucalgary.part3groupprojectcpsc233.app;
 
+//importing helper-controllers
+import ca.ucalgary.part3groupprojectcpsc233.app.fileMenuControllers.*;
+
 import ca.ucalgary.part3groupprojectcpsc233.enums.Nationality;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Person;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Player;
@@ -86,8 +89,8 @@ public class MainController {
         data = new Data();
         viewingPerson = true;
     }
-    //null when no save file exsits, used to determine if save should use save or "save as" functionality
-    private File saveFileLocation = null;
+    //null when no save file exists, used to determine if save should use save or "save as" functionality
+    private File saveFile = null;
     @FXML
     protected void new_MenuItem(){
         data.reset();
@@ -102,7 +105,6 @@ public class MainController {
         File initialDirectory = new File(initalDirectoryString+"/src/exampleSaveFiles");
         if(initialDirectory.canRead()){
             fc.setInitialDirectory(initialDirectory);
-
         }
         //unable to open directory
         else{
@@ -131,10 +133,19 @@ public class MainController {
     }
     @FXML
     protected void save_MenuItem(){
-
+        //If save file exists and therefore "save" functionality can be used
+        if(saveFile.canWrite()){
+            SaveController controller = new SaveController(data);
+            controller.saveState(saveFile);
+        }
+        //If save file does not exist and therefore "save as functionality must be used"
+        else{
+            saveAs_MenuItem();
+        }
     }
     @FXML
     protected void saveAs_MenuItem(){
+        FileChooser fc = new FileChooser();
 
     }
     @FXML
