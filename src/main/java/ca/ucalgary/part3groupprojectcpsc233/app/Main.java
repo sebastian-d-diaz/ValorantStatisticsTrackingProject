@@ -1,3 +1,8 @@
+
+/**
+ * Authors: Sebastian Diaz, Brian Chhan, Daniel Zhang
+ * Tutorial: Tut 08, TA: Samuel Osweiler
+ */
 package ca.ucalgary.part3groupprojectcpsc233.app;
 
 import ca.ucalgary.part3groupprojectcpsc233.Data;
