@@ -5,6 +5,7 @@ package ca.ucalgary.part3groupprojectcpsc233.app;
 import ca.ucalgary.part3groupprojectcpsc233.enums.Nationality;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Person;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Player;
+import ca.ucalgary.part3groupprojectcpsc233.objects.Team;
 import ca.ucalgary.part3groupprojectcpsc233.util.Reader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -43,6 +44,9 @@ public class MainController {
     private MenuItem Quit;
 
     @FXML
+    private TextArea teamField;
+
+    @FXML
     private TextField inputBox;
 
     @FXML
@@ -79,6 +83,15 @@ public class MainController {
     private TextArea textAreaChile;
 
     @FXML
+    private Label labelChile;
+
+    @FXML
+    private Label labelArgentina;
+
+    @FXML
+    private Label labelEurope;
+
+    @FXML
     private ToolBar inputToolBar;
 
     @FXML
@@ -96,6 +109,8 @@ public class MainController {
 
     private boolean viewingPerson;
 
+    private boolean viewingTeam;
+
     //Setting up FileChooser for File menu items
     FileChooser fileChooser = new FileChooser();
     File initialDirectory = new File(System.getProperty("user.dir")+"/src/exampleSaveFiles");
@@ -104,6 +119,7 @@ public class MainController {
         fileChooser.setInitialDirectory(initialDirectory);
         data = new Data();
         viewingPerson = true;
+        viewingTeam = false;
     }
     //null when no save file exists, used to determine if save should use save or "save as" functionality
     private File saveFile = null;
@@ -216,9 +232,20 @@ public class MainController {
         alert.show();
     }
 
+    @FXML
+    void controlsPopout(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Controls");
+        alert.setHeaderText("How do I use this?");
+        alert.setContentText("The majority of this tool is used through the Menu Bar on the very top. From there, you " +
+                "can add players, stats to them, add people, and sort through their statistics and information with a " +
+                "variety of criteria. To save/load, use the File option and select what you would like to do. Use of the " +
+                "middle mouse button or even right click is not required, so a trackpad will do.");
+        alert.show();
+    }
 
     void refreshPersonFields(){
-        if (!viewingPerson){
+        if (!viewingPerson || viewingTeam){
             return;
         }
         //wiping
@@ -291,21 +318,133 @@ public class MainController {
 
     @FXML
     void changeMainViewToPeople(){
+        teamField.setDisable(true);
+        teamField.setVisible(false);
+
+        textAreaCanada.setDisable(false);
+        textAreaCanada.setVisible(true);
+
+        textAreaEurope.setDisable(false);
+        textAreaEurope.setVisible((true));
+        labelEurope.setText("Europe");
+
+        textAreaUSA.setDisable(false);
+        textAreaUSA.setVisible(true);
+
+        textAreaChile.setDisable(false);
+        textAreaChile.setVisible(true);
+        labelChile.setText("Chile");
+
+        textAreaAsia.setDisable(false);
+        textAreaAsia.setVisible(true);
+
+        textAreaBrazil.setDisable(false);
+        textAreaBrazil.setVisible(true);
+
+        textAreaArgentina.setDisable(false);
+        textAreaArgentina.setVisible(true);
+        labelArgentina.setText("Argentina");
+
         viewingPerson = true;
+        viewingTeam = false;
         labelViewing.setText("Viewing: People");
         refreshPersonFields();
     }
 
     @FXML
     void changeMainViewToPlayers(){
+        teamField.setDisable(true);
+        teamField.setVisible(false);
+
+        textAreaCanada.setDisable(false);
+        textAreaCanada.setVisible(true);
+
+        textAreaEurope.setDisable(false);
+        textAreaEurope.setVisible((true));
+        labelEurope.setText("Europe");
+
+        textAreaUSA.setDisable(false);
+        textAreaUSA.setVisible(true);
+
+        textAreaChile.setDisable(false);
+        textAreaChile.setVisible(true);
+        labelChile.setText("Chile");
+
+        textAreaAsia.setDisable(false);
+        textAreaAsia.setVisible(true);
+
+        textAreaBrazil.setDisable(false);
+        textAreaBrazil.setVisible(true);
+
+        textAreaArgentina.setDisable(false);
+        textAreaArgentina.setVisible(true);
+        labelArgentina.setText("Argentina");
+
         viewingPerson = false;
+        viewingTeam = false;
         labelViewing.setText("Viewing: Players");
         refreshPlayerFields();
     }
 
+    @FXML
+    void changeMainViewToTeams(){
+        teamField.setDisable(false);
+        teamField.setVisible(true);
+
+        textAreaCanada.setDisable(false);
+        textAreaCanada.setVisible(true);
+
+        textAreaEurope.setDisable(false);
+        textAreaEurope.setVisible((true));
+        labelEurope.setText("");
+
+        textAreaUSA.setDisable(true);
+        textAreaUSA.setVisible(false);
+
+        textAreaChile.setDisable(true);
+        textAreaChile.setVisible(false);
+        labelChile.setText("");
+
+        textAreaAsia.setDisable(true);
+        textAreaAsia.setVisible(false);
+
+        textAreaBrazil.setDisable(true);
+        textAreaBrazil.setVisible(false);
+
+        textAreaArgentina.setDisable(true);
+        textAreaArgentina.setVisible(false);
+        labelArgentina.setText("");
+
+        viewingPerson = false;
+        viewingTeam = true;
+        labelViewing.setText("Viewing: Teams");
+        refreshTeamFields();
+    }
+
+    void refreshTeamFields(){
+        if (viewingPerson || !viewingTeam){
+            return;
+        }
+        ArrayList<Team> allTeams = data.queryAllTeams();
+
+        if (allTeams == null){
+            labelStatus.setText("No teams found.");
+        }
+        else{
+            teamField.setText("");
+            for (Team team : allTeams){
+                teamField.appendText(team.getTeamName() + ": ");
+                for (Player players : team.getTeamMembers()){
+                    teamField.appendText(players.getUsername());
+                }
+                teamField.appendText("\n");
+            }
+        }
+
+    }
 
     void refreshPlayerFields(){
-        if (viewingPerson){
+        if (viewingPerson || viewingTeam){
             return;
         }
 
@@ -500,6 +639,23 @@ public class MainController {
             labelStatus.setLayoutX(740.0);
             labelStatus.setText("Only "+players.size()+" players exist; need 5");
         }
+    }
+
+    @FXML
+    void showOverAge(){
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GetOverAge.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        GetOverAgeController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Player Over Age...");
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
 }

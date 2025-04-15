@@ -1,6 +1,6 @@
 true
 15
-Noob1,USA,30,//Beginning of person section. Username,nationality,age. Line 1 refers to if there exists a single person and line 2 that theres 15 people
+Noob1,USA,30
 Pro1,Chile,12
 Hacker1,Asia,18
 Noob2,Canada,29
@@ -17,23 +17,23 @@ Pro5,Europe,20
 Hacker5,Asia,20
 true
 15
-Hacker5,9002,9003,0,9005,9006,line 18 means there exists at least one player and how many on line 19
+Hacker5,9002,9003,0,9005,9006
 Noob1,1,2,30,4,5
 Pro1,69,70,7,6,73
 Hacker4,9007,9008,0,9009,9010
 Noob2,2,3,4,5,6
 Pro2,74,75,22,76,77
-Hacker3,9009,9010,0,9011,9012
 Noob3,3,4,5,6,7,8
 Pro3,77,78,23,79,80
-Hacker2,9012,9013,0,9014,9015
+Hacker3,9012,9013,0,9014,9015
 Noob4,4,5,6,7,8,9
 Pro4,80,81,0,92,93
-Hacker1,9015,9016,0,9017,9018
+Hacker2,9015,9016,0,9017,9018
 Noob5,5,6,7,8,9,10
 Pro5,93,95,21,96,97
+Hacker1,9018,9019,0,9020,9021
 true
 3
-NoobTeam,Noob,1,Noob2,Noob3,Noob4,Noob5, Team name and 5 names of players, 3 teams as per line 36
+NoobTeam,Noob1,Noob2,Noob3,Noob4,Noob5
 ProTeam,Pro1,Pro2,Pro3,Pro4,Pro5
 HackerTeam,Hacker1,Hacker2,Hacker3,Hacker4,Hacker5
