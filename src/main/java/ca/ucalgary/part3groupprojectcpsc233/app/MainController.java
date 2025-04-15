@@ -86,7 +86,8 @@ public class MainController {
         data = new Data();
         viewingPerson = true;
     }
-
+    //null when no save file exsits, used to determine if save should use save or "save as" functionality
+    private File saveFileLocation = null;
     @FXML
     protected void new_MenuItem(){
         data.reset();
@@ -95,9 +96,6 @@ public class MainController {
     }
     @FXML
     protected void open_MenuItem(){
-
-        //refreshing scene
-
         FileChooser fc = new FileChooser();
         //Filechooser default directory
         String initalDirectoryString = System.getProperty("user.dir");
@@ -127,7 +125,9 @@ public class MainController {
             labelStatus.setLayoutX(760.0);
             labelStatus.setText("Unable to Load File :(");
         }
-
+        //refreshing
+        refreshPlayerFields();
+        refreshPersonFields();
     }
     @FXML
     protected void save_MenuItem(){
