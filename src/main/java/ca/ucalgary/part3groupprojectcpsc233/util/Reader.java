@@ -151,9 +151,10 @@ public class Reader {
             //loading teams
             //checking if there are players
             line = bfr.readLine();
-            if(!line.equals("true")){
+            if(line.equals("false")){
                 return true;
             }
+            System.out.println(line);
             line = bfr.readLine();
             int teamCount = Integer.parseInt(line);
             for(int t=0;t<teamCount;t++){
@@ -165,7 +166,7 @@ public class Reader {
                 String player3 = splitLine[INDEX_PLAYER3];
                 String player4 = splitLine[INDEX_PLAYER4];
                 String player5 = splitLine[INDEX_PLAYER5];
-                ArrayList players = new ArrayList();
+                ArrayList<Player> players = new ArrayList<>();
                 players.add(data.querySpecificPlayer(player1));
                 players.add(data.querySpecificPlayer(player2));
                 players.add(data.querySpecificPlayer(player3));

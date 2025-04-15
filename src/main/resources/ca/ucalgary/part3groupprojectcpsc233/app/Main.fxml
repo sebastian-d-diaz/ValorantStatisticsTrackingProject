@@ -55,7 +55,7 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#changeMainViewToPeople" text="People" />
                         <MenuItem mnemonicParsing="false" onAction="#changeMainViewToPlayers" text="Players Based on Nationality" />
-                        <MenuItem mnemonicParsing="false" text="based on Teams" />
+                        <MenuItem mnemonicParsing="false" onAction="#changeMainViewToTeams" text="based on Teams" />
                         <Menu mnemonicParsing="false" text="all players on a Team:">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -76,7 +76,7 @@
             <children>
                 <Pane prefHeight="772.0" prefWidth="894.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <Label layoutX="351.0" text="Europe">
+                        <Label fx:id="labelEurope" layoutX="351.0" text="Europe">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -96,7 +96,7 @@
                                 <Font size="24.0" />
                             </font>
                         </Label>
-                        <Label layoutX="657.0" text="Argentina">
+                        <Label fx:id="labelArgentina" layoutX="657.0" text="Argentina">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -111,7 +111,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="657.0" layoutY="184.0" text="Chile">
+                        <Label fx:id="labelChile" layoutX="657.0" layoutY="184.0" text="Chile">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -142,6 +142,7 @@
                                 <Blend mode="SCREEN" />
                             </effect>
                         </VBox>
+                  <TextArea fx:id="teamField" editable="false" layoutX="14.0" layoutY="18.0" prefHeight="523.0" prefWidth="537.0" visible="false" />
                     </children></Pane>
             </children>
             <padding>
