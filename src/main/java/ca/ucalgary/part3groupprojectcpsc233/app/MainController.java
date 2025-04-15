@@ -630,4 +630,21 @@ public class MainController {
         }
     }
 
+    @FXML
+    void showOverAge(){
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GetOverAge.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        GetOverAgeController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Player Over Age...");
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
 }

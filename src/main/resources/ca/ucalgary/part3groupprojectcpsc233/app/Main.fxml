@@ -62,7 +62,7 @@
                             </items>
                         </Menu>
                         <MenuItem mnemonicParsing="false" text="players and Stats" />
-                        <MenuItem mnemonicParsing="false" text="players Over Age" />
+                        <MenuItem mnemonicParsing="false" onAction="#showOverAge" text="players Over Age" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Get Recommended Team Based On:">
