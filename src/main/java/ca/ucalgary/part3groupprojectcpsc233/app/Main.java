@@ -24,9 +24,6 @@ public class Main extends Application {
             controller.setData(data);
             controller.refreshPersonFields();
         }
-        else{
-            System.err.println("File does not exist!");
-        }
         stage.setTitle("Valorant Esports Statistics Tracker");
         stage.setScene(scene);
         stage.show();

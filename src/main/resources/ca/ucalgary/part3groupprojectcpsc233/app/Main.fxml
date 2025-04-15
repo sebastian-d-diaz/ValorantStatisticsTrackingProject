@@ -19,7 +19,7 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem fx:id="New" mnemonicParsing="false" onAction="#new_MenuItem" text="New" />
+                        <MenuItem mnemonicParsing="false" onAction="#new_MenuItem" text="New" />
                         <MenuItem fx:id="Open" mnemonicParsing="false" onAction="#open_MenuItem" text="Open…" />
                         <MenuItem fx:id="Save" mnemonicParsing="false" onAction="#save_MenuItem" text="Save" />
                         <MenuItem fx:id="SaveAs" mnemonicParsing="false" onAction="#saveAs_MenuItem" text="Save As…" />

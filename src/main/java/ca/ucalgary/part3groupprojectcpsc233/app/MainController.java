@@ -12,13 +12,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import ca.ucalgary.part3groupprojectcpsc233.Data;
 import javafx.stage.Stage;
@@ -33,8 +31,6 @@ public class MainController {
     }
     //File MenuItems
     @FXML
-    private MenuItem New;
-    @FXML
     private MenuItem Open;
     @FXML
     private MenuItem Save;
@@ -43,17 +39,9 @@ public class MainController {
     @FXML
     private MenuItem Quit;
 
+    // main view labels and textareas
     @FXML
     private TextArea teamField;
-
-    @FXML
-    private TextField inputBox;
-
-    @FXML
-    private Text inputTitle;
-
-    @FXML
-    private Button confirmInputButton;
 
     @FXML
     private Label labelViewing;
@@ -91,9 +79,8 @@ public class MainController {
     @FXML
     private Label labelEurope;
 
-    @FXML
-    private ToolBar inputToolBar;
 
+    // items for reccommendedTeam
     @FXML
     private MenuItem GetRecommendedTeam;
     @FXML
@@ -107,6 +94,7 @@ public class MainController {
     @FXML
     private Label Recommended5;
 
+    // booleans tracking what view a user is currently in
     private boolean viewingPerson;
 
     private boolean viewingTeam;
@@ -139,6 +127,10 @@ public class MainController {
         refreshPersonFields();
 
     }
+
+    /**
+     * Function handling opening/loading from a file
+     */
     @FXML
     protected void open_MenuItem(){
         //unable to open default directory
@@ -167,6 +159,10 @@ public class MainController {
         refreshPlayerFields();
         refreshPersonFields();
     }
+
+    /**
+     * Function handling saving to an already existing file
+     */
     @FXML
     protected void save_MenuItem(){
         //Checking if there is data
@@ -187,6 +183,10 @@ public class MainController {
             saveAs_MenuItem();
         }
     }
+
+    /**
+     * Function handling saving file as a csv file
+     */
     @FXML
     protected void saveAs_MenuItem(){
         //Checking if there is data
@@ -203,7 +203,7 @@ public class MainController {
         //checking if file can be written to
         if(file!=null){
             //Saving file
-            Boolean savedStatus = Reader.GUIsave(data, file);
+            boolean savedStatus = Reader.GUIsave(data, file);
             //Reader was able to successfully save file
             if(savedStatus){
                 labelStatus.setLayoutX(750.0);
@@ -254,6 +254,9 @@ public class MainController {
         alert.show();
     }
 
+    /**
+     * Function to refresh the fields when viewing People by nationality
+     */
     void refreshPersonFields(){
         if (!viewingPerson || viewingTeam){
             return;
@@ -274,6 +277,7 @@ public class MainController {
             return;
         }
 
+        // correctly set TextAreas
         for (Person person : canadians){
             textAreaCanada.appendText(person.toString() + "\n");
         }
@@ -311,12 +315,11 @@ public class MainController {
 
     /**
      * used to add a person to the database using a button
-     * @throws IOException Error that occurs if something goes wrong
      */
     @FXML
-    void addPerson() throws IOException {
+    void addPerson() {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPerson.fxml")); //load the fxml for add person
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 400, 400); //try to create a new window
         } catch (IOException e) {
@@ -331,8 +334,13 @@ public class MainController {
         refreshPersonFields();
     }
 
+    /**
+     * Changes main view to display People
+     */
     @FXML
     void changeMainViewToPeople(){
+
+        // set correct visibility of TextAreas
         teamField.setDisable(true);
         teamField.setVisible(false);
 
@@ -366,8 +374,13 @@ public class MainController {
         refreshPersonFields();
     }
 
+    /**
+     * Function to change main view to Players
+     */
     @FXML
     void changeMainViewToPlayers(){
+
+        // ensure textfields are correct with corresponding view
         teamField.setDisable(true);
         teamField.setVisible(false);
 
@@ -401,8 +414,13 @@ public class MainController {
         refreshPlayerFields();
     }
 
+    /**
+     * Function to change view based on teams
+     */
     @FXML
     void changeMainViewToTeams(){
+
+        // once again change visibility of certain textfields to match
         teamField.setDisable(false);
         teamField.setVisible(true);
 
@@ -436,7 +454,12 @@ public class MainController {
         refreshTeamFields();
     }
 
+    /**
+     * Refresh textareas to reflect current teams
+     */
     void refreshTeamFields(){
+
+        // if booleans suggest that you are not viewing teams, dont proceed
         if (viewingPerson || !viewingTeam){
             return;
         }
@@ -458,6 +481,9 @@ public class MainController {
 
     }
 
+    /**
+     * Refresh TextFields to represent current players
+     */
     void refreshPlayerFields(){
         if (viewingPerson || viewingTeam){
             return;
@@ -478,7 +504,7 @@ public class MainController {
         textAreaUSA.setText("");
         textAreaEurope.setText("");
 
-
+        // actually set up TextFields/TextAreas
         for (Player player : allPlayers){
             if (player.getNationality() == Nationality.CAN){
                 textAreaCanada.appendText(player + "\n");
@@ -510,7 +536,7 @@ public class MainController {
     @FXML
     void addPlayer(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml")); //load fxml for add player
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 300, 300); // try to create popup window
         } catch (IOException e) {
@@ -531,7 +557,7 @@ public class MainController {
     @FXML
     void addKills(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddKills.fxml")); //load fxml file for add kills
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 300, 300); //try to create popup window
         } catch (IOException e) {
@@ -552,7 +578,7 @@ public class MainController {
     @FXML
     void addAssists(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddAssists.fxml")); //load the fxml for add assists
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 300, 300); //try to create the popup window
         } catch (IOException e) {
@@ -573,7 +599,7 @@ public class MainController {
     @FXML
     void addDeaths(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddDeaths.fxml")); //load the fxml file for add deaths
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 300, 300); //try to create the popup window
         } catch (IOException e) {
@@ -594,7 +620,7 @@ public class MainController {
     @FXML
     void addACS(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddACS.fxml")); //load the fxml file for add ACS
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 300, 300); //try to create popup window
         } catch (IOException e) {
@@ -615,7 +641,7 @@ public class MainController {
     @FXML
     void addADR(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddADR.fxml")); //load the fxml for add ADR
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 300, 300); //try to create the popup window
         } catch (IOException e) {
@@ -636,7 +662,7 @@ public class MainController {
     @FXML
     void showHighestStats(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("HighestStats.fxml")); //load the fxml file for highest stats
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 600, 400); //try to create the popup window
         } catch (IOException e) {
@@ -684,7 +710,7 @@ public class MainController {
     @FXML
     void showOverAge(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GetOverAge.fxml")); //load the fxml file for get over age
-        Scene scene = null;
+        Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 600, 500); //try to create popup window
         } catch (IOException e) {
@@ -697,10 +723,14 @@ public class MainController {
         stage.setScene(scene);
         stage.showAndWait();
     }
+
+    /**
+     * Function concerns when one is forming a team from 5 players
+     */
     @FXML
     void FormATeam(){
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("FormTeam.fxml"));
-        Scene scene = null;
+        Scene scene;
         try{
             scene = new Scene(fxmlLoader.load(),400,600);
         }
