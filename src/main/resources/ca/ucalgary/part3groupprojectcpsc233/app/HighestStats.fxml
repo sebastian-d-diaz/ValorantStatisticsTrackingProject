@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.part3groupprojectcpsc233.app.HighestStatsController">
+   <children>
+      <TextArea fx:id="HighestText" editable="false" prefHeight="300.0" prefWidth="600.0">
+         <font>
+            <Font name="Calibri" size="14.0" />
+         </font>
+      </TextArea>
+      <HBox prefHeight="151.0" prefWidth="600.0">
+         <children>
+            <MenuButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="125.0" prefWidth="600.0" text="Find Highest...">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#displayHighestACS" text="Highest ACS" />
+                <MenuItem mnemonicParsing="false" onAction="#displayHighestADR" text="Highest ADR" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayHighestKills" text="Highest Kills" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayHighestAssists" text="Highest Assists" />
+                  <MenuItem mnemonicParsing="false" onAction="#displayHighestDeaths" text="Highest Deaths" />
+              </items>
+            </MenuButton>
+         </children>
+      </HBox>
+   </children>
+</VBox>

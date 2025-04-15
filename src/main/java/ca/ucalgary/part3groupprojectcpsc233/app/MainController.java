@@ -397,5 +397,22 @@ public class MainController {
         refreshPlayerFields();
     }
 
+    @FXML
+    void showHighestStats(){
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("HighestStats.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        HighestStatsController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Highest Stats");
+        stage.setScene(scene);
+        stage.showAndWait();
+        refreshPlayerFields();
+    }
 
 }

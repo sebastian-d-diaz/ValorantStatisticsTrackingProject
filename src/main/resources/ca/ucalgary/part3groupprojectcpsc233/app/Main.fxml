@@ -51,11 +51,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Search Based on:">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Highest ACS" />
-                        <MenuItem mnemonicParsing="false" text="Highest ADR" />
-                        <MenuItem mnemonicParsing="false" text="Most Kills" />
-                        <MenuItem mnemonicParsing="false" text="Most Assists" />
-                        <MenuItem mnemonicParsing="false" text="Most Deaths" />
+                        <MenuItem mnemonicParsing="false" onAction="#showHighestStats" text="Highest Stats" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="View:">

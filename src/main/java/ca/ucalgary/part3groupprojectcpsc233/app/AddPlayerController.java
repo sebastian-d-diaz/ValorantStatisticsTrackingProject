@@ -32,6 +32,7 @@ public class AddPlayerController {
             status.setText("No person of that name found.");
             return;
         }
+        status.setText("Success");
         data.storeNewPlayer(newPlayer);
 
     }
