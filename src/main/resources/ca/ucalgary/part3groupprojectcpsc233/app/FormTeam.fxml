@@ -9,48 +9,55 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller=" ca.ucalgary.part3groupprojectcpsc233.app.FormTeamController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.part3groupprojectcpsc233.app.FormTeamController">
     <children>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <Label prefHeight="18.0" prefWidth="96.0" text="Enter player 1" />
-                <TextField alignment="CENTER" />
-                <Label text="Label" />
+                <Label  prefHeight="18.0" prefWidth="114.0" text="Enter Team Name" />
+                <TextField fx:id="TeamNameField" />
+                <Label />
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <Label prefHeight="18.0" prefWidth="97.0" text="Enter player 2" />
-                <TextField />
-                <Label text="Label" />
+                <Label fx:id="Player1" prefHeight="18.0" prefWidth="96.0" text="Enter player 1" />
+                <TextField fx:id="Player1Field" alignment="CENTER" />
+                <Label fx:id="Status1" text="" />
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <Label prefHeight="18.0" prefWidth="96.0" text="Enter player 3" />
-                <TextField />
-                <Label text="Label" />
+                <Label fx:id="Player2" prefHeight="18.0" prefWidth="97.0" text="Enter player 2" />
+                <TextField fx:id="Player2Field" />
+                <Label fx:id="Status2" text="" />
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <Label prefHeight="18.0" prefWidth="94.0" text="Enter player 4" />
-                <TextField />
-                <Label text="Label" />
+                <Label fx:id="Player3" prefHeight="18.0" prefWidth="96.0" text="Enter player 3" />
+                <TextField fx:id="Player3Field" />
+                <Label fx:id="Status3" text="" />
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <Label prefHeight="18.0" prefWidth="88.0" text="Enter player 5" />
-                <TextField />
-                <Label prefHeight="18.0" prefWidth="43.0" text="Label" />
+                <Label fx:id="Player4" prefHeight="18.0" prefWidth="94.0" text="Enter player 4" />
+                <TextField fx:id="Player4Field" />
+                <Label fx:id="Status4" text="" />
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <Label fx:id="Player5" prefHeight="18.0" prefWidth="88.0" text="Enter player 5" />
+                <TextField fx:id="Player5Field" />
+                <Label fx:id="Status5" prefHeight="18.0" prefWidth="43.0" text="" />
             </children>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                     <children>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <Button fx:id="FormTeam" mnemonicParsing="false" onAction="#formTeamButton" text="Form Team" />
                     </children>
                 </VBox>
             </children>

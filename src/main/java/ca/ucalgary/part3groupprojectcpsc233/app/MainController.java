@@ -657,5 +657,23 @@ public class MainController {
         stage.setScene(scene);
         stage.showAndWait();
     }
+    @FXML
+    void FormATeam(){
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("FormTeam.fxml"));
+        Scene scene = null;
+        try{
+            scene = new Scene(fxmlLoader.load(),400,600);
+        }
+        catch(IOException e){
+            throw new RuntimeException(e);
+        }
+        FormTeamController controller = fxmlLoader.getController();
+        controller.setData(data);
+        Stage stage = new Stage();
+        stage.setTitle("Form a Team");
+        stage.setScene(scene);
+        stage.showAndWait();
+        refreshTeamFields();
+    }
 
 }
