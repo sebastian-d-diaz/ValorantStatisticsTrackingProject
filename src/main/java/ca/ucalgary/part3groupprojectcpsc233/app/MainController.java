@@ -146,18 +146,10 @@ public class MainController {
         }
         //If save file exists and therefore "save" functionality can be used
         if(saveFile!=null&&saveFile.canWrite()){
-            //Checking if file can be written to
-            if(saveFile.canWrite()){
-                //using reader to save file
-                Reader.GUIsave(data,saveFile);
-                labelStatus.setLayoutX(750.0);
-                labelStatus.setText("File Saved Successfully :)");
-
-            }//unable to read from file
-            else{
-                labelStatus.setLayoutX(760.0);
-                labelStatus.setText("Unable to Save File :(");
-            }
+            //using reader to save file
+            Reader.GUIsave(data,saveFile);
+            labelStatus.setLayoutX(750.0);
+            labelStatus.setText("File Saved Successfully :)");
         }
         //If save file does not exist and therefore "save as functionality must be used"
         else{
@@ -176,15 +168,16 @@ public class MainController {
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
         //displaying popup and getting file
-        File saveFile = fileChooser.showSaveDialog(SaveAs.getParentPopup().getOwnerWindow());
+        File file = fileChooser.showSaveDialog(SaveAs.getParentPopup().getOwnerWindow());
         //checking if file can be written to
-        if(saveFile!=null){
+        if(file!=null){
             //Saving file
-            Boolean savedStatus = Reader.GUIsave(data, saveFile);
+            Boolean savedStatus = Reader.GUIsave(data, file);
             //Reader was able to successfully save file
             if(savedStatus){
                 labelStatus.setLayoutX(750.0);
                 labelStatus.setText("File saved Successfully :)");
+                saveFile=file;
             }
             //Reader was not able to save file
             else{
