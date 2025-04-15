@@ -18,8 +18,6 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
         MainController controller = fxmlLoader.getController();
-        System.out.println("Trying to load file: " + file.getAbsolutePath());
-        System.out.println("File exists? " + file.exists());
         if (file != null && file.exists()){
             Data data = new Data();
             Reader.GUIload(data, file);
