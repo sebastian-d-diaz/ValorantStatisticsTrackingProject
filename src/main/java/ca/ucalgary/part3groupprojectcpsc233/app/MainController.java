@@ -232,6 +232,17 @@ public class MainController {
         alert.show();
     }
 
+    @FXML
+    void controlsPopout(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Controls");
+        alert.setHeaderText("How do I use this?");
+        alert.setContentText("The majority of this tool is used through the Menu Bar on the very top. From there, you " +
+                "can add players, stats to them, add people, and sort through their statistics and information with a " +
+                "variety of criteria. To save/load, use the File option and select what you would like to do. Use of the " +
+                "middle mouse button or even right click is not required, so a trackpad will do.");
+        alert.show();
+    }
 
     void refreshPersonFields(){
         if (!viewingPerson || viewingTeam){
