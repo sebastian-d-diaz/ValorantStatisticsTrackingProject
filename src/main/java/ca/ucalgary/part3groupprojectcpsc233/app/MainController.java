@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import ca.ucalgary.part3groupprojectcpsc233.Data;
 import javafx.stage.Stage;
@@ -80,6 +81,19 @@ public class MainController {
     @FXML
     private ToolBar inputToolBar;
 
+    @FXML
+    private MenuItem GetRecommendedTeam;
+    @FXML
+    private Label Recommended1;
+    @FXML
+    private Label Recommended2;
+    @FXML
+    private Label Recommended3;
+    @FXML
+    private Label Recommended4;
+    @FXML
+    private Label Recommended5;
+
     private boolean viewingPerson;
 
     //Setting up FileChooser for File menu items
@@ -88,8 +102,6 @@ public class MainController {
 
     public void initialize() {
         fileChooser.setInitialDirectory(initialDirectory);
-        inputTitle.setVisible(false);
-        inputToolBar.setVisible(false);
         data = new Data();
         viewingPerson = true;
     }
@@ -461,6 +473,33 @@ public class MainController {
         stage.setScene(scene);
         stage.showAndWait();
         refreshPlayerFields();
+    }
+    @FXML
+    void recommendedTeam(){
+        ArrayList<Player> players = data.queryAllPlayers();
+        //If there aren't enough players, anticipating NullPointerException
+        if(players==null){
+            labelStatus.setLayoutX(770.0);
+            labelStatus.setText("No players exist; need 5");
+        }
+        else if(data.queryAllPlayers().size()>=5){
+            Player[] recommended = data.findRecommendedTeam();
+            Recommended1.setText(" "+recommended[0].getUsername()+"                  "+recommended[0].getAcs());
+            Recommended2.setText(" "+recommended[1].getUsername()+"                  "+recommended[1].getAcs());
+            Recommended3.setText(" "+recommended[2].getUsername()+"                  "+recommended[2].getAcs());
+            Recommended4.setText(" "+recommended[3].getUsername()+"                  "+recommended[3].getAcs());
+            Recommended5.setText(" "+recommended[4].getUsername()+"                  "+recommended[4].getAcs());
+
+            labelStatus.setLayoutX(730.0);
+            labelStatus.setText("Recommended Team Found");
+        }
+        //not enough players
+        else{
+            //Anticipating NullPointerException
+
+            labelStatus.setLayoutX(740.0);
+            labelStatus.setText("Only "+players.size()+" players exist; need 5");
+        }
     }
 
 }
