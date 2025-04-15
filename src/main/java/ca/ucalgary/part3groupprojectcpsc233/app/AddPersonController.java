@@ -12,41 +12,44 @@ import static ca.ucalgary.part3groupprojectcpsc233.enums.Nationality.getNational
 public class AddPersonController {
 
     @FXML
-    private TextField age;
+    private TextField age;//input field for age
 
     @FXML
-    private TextField name;
+    private TextField name;//input field for name
 
     @FXML
-    private TextField nationality;
+    private TextField nationality;//input field for nationality
 
     @FXML
-    private Label status;
+    private Label status;//status of the window
 
     private Data data;
     public void setData(Data data) {
         this.data = data;
-    }
+    }//creating instance of data.java
 
-
+    /**
+     * After filling out required text fields and pressing the add button,
+     * take the inputs and use them for the store person function in data
+     * @param event user presses button in GUI
+     */
     @FXML
     void add(ActionEvent event) {
-        String username = name.getText().stripTrailing();
-        Nationality nat = getNationality(nationality.getText());
+        String username = name.getText().stripTrailing(); //get inputted name
+        Nationality nat = getNationality(nationality.getText());//get inputted nationality
         //checking nationality
-        if(nat==null){
+        if(nat==null){ //nationality doesn't exist
             status.setText("Failed, unknown nationality");
             return;
         }
         //checking Age
         try {
-            int personAge = Integer.parseInt(age.getText());//add error checking after
-            data.storeNewPerson(username,nat,personAge);
+            int personAge = Integer.parseInt(age.getText());//get inputted age
+            this.data.storeNewPerson(username,nat,personAge); //store name, nationality,age
             status.setText("Success");
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) { //invalid age given
             status.setText("Failed, Age Must be an Integer");
         }
-
     }
 
 }

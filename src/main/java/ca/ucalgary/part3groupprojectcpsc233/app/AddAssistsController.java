@@ -9,34 +9,38 @@ import javafx.scene.control.TextField;
 public class AddAssistsController {
 
     @FXML
-    private TextField assists;
+    private TextField assists; //input field for assists
 
     @FXML
-    private TextField name;
+    private TextField name; //input field for username
 
     @FXML
-    private Label status;
+    private Label status; //status of the window
 
     private Data data;
-    public void setData(Data data) {
+    public void setData(Data data) { //creating instance of data.java
         this.data = data;
     }
 
-
+    /**
+     * After filling out required text fields and pressing the add button,
+     * take the inputs and use them for the store assists function in data
+     * @param event user presses button in GUI
+     */
     @FXML
     void add(ActionEvent event) {
-        String username = name.getText();
-        int numAssists = Integer.parseInt(assists.getText());
-        boolean success = data.storeAssistsToPlayer(username,numAssists);
-
-        if(!success){
-            status.setText("No player found with username.");
+        String username = name.getText(); //get inputted username
+        try {
+            int numAssists = Integer.parseInt(assists.getText()); //get inputted assists
+            boolean success = this.data.storeAssistsToPlayer(username, numAssists); //store assists to player
+            if (!success) { //unsuccessful, no player found
+                status.setText("No player found with username.");
+            } else { //successful
+                status.setText("Success!");
+            }
+        } catch (NumberFormatException e) { //invalid integer input
+            status.setText("ERROR, Input a valid Integer for assists");
         }
-        else{
-            status.setText("Success!");
-        }
-
-
     }
 
 }
