@@ -15,11 +15,11 @@ public class Reader {
     public static final int INDEX_NAME = 0;
     public static final int INDEX_NATIONALITY = 1;
     public static final int INDEX_AGE = 2;
-    public static final int INDEX_KILLS = 3;
-    public static final int INDEX_ASSISTS = 4;
-    public static final int INDEX_DEATHS = 5;
-    public static final int INDEX_ACS = 6;
-    public static final int INDEX_ADR = 7;
+    public static final int INDEX_KILLS = 1;
+    public static final int INDEX_ASSISTS = 2;
+    public static final int INDEX_DEATHS = 3;
+    public static final int INDEX_ACS = 4;
+    public static final int INDEX_ADR = 5;
     public static final int INDEX_TEAMNAME = 0;
     public static final int INDEX_PLAYER1 = 1;
     public static final int INDEX_PLAYER2 = 2;
@@ -28,6 +28,7 @@ public class Reader {
     public static final int INDEX_PLAYER5 = 5;
 
     public static boolean GUIsave(Data data, File file){
+        //Checking if there is data
         FileWriter fw = null;
         BufferedWriter bfw = null;
         try{
@@ -35,28 +36,41 @@ public class Reader {
             bfw = new BufferedWriter(fw);
             //saving people
             ArrayList<Person> people = data.queryAllPersons();
+            bfw.write("true\n");//there are people
             bfw.write(data.queryAllPersons().size()+"\n");//Number of people
             for(Person person:people){
                 bfw.write(person.getUsername()+","+String.valueOf(person.getNationality())+","+person.getAge()+"\n");//"username,nationality,age\n" for each person
             }
             //saving Players
             ArrayList<Player> players = data.queryAllPlayers();
-            bfw.write(players.size()+"\n");//Number of players
-            for(Player player:players){
-                bfw.write(player.getUsername()+","+player.getAge()+","+player.getKills()+","+player.getAssists()+","+player.getDeaths()+","+player.getAcs()+","+player.getAdr()+"\n");//"username,age,kills,assists,deaths,acs,adr\n"
+            if(players!=null) {//checking if there are players
+                bfw.write("true+\n");
+                bfw.write(players.size() + "\n");//Number of players
+                for (Player player : players) {
+                    bfw.write(player.getUsername() + "," + player.getAge() + "," + player.getKills() + "," + player.getAssists() + "," + player.getDeaths() + "," + player.getAcs() + "," + player.getAdr() + "\n");//"username,age,kills,assists,deaths,acs,adr\n"
+                }
+            }
+            else{
+                bfw.write("false\n");//no players
             }
             //Saving Teams
             ArrayList<Team> teams = data.queryAllTeams();
-            bfw.write(teams.size()+"\n");//number of teams
-            for(Team team:teams){
-                bfw.write(team.getTeamName()+",");//writing team name, note a newline character is not present here
-                ArrayList<Player> playersOnTeam = team.getTeamMembers();
-                String usernameP1 = playersOnTeam.get(INDEX_PLAYER1).getUsername();
-                String usernameP2 = playersOnTeam.get(INDEX_PLAYER2).getUsername();
-                String usernameP3 = playersOnTeam.get(INDEX_PLAYER3).getUsername();
-                String usernameP4 = playersOnTeam.get(INDEX_PLAYER4).getUsername();
-                String usernameP5 = playersOnTeam.get(INDEX_PLAYER5).getUsername();
-                bfw.write(usernameP1+","+usernameP2+","+usernameP3+","+usernameP4+","+usernameP5+"\n");
+            if(teams!=null) {//checking if there are teams
+                bfw.write("true\n");//there are players
+                bfw.write(teams.size() + "\n");//number of teams
+                for (Team team : teams) {
+                    bfw.write(team.getTeamName() + ",");//writing team name, note a newline character is not present here
+                    ArrayList<Player> playersOnTeam = team.getTeamMembers();
+                    String usernameP1 = playersOnTeam.get(INDEX_PLAYER1).getUsername();
+                    String usernameP2 = playersOnTeam.get(INDEX_PLAYER2).getUsername();
+                    String usernameP3 = playersOnTeam.get(INDEX_PLAYER3).getUsername();
+                    String usernameP4 = playersOnTeam.get(INDEX_PLAYER4).getUsername();
+                    String usernameP5 = playersOnTeam.get(INDEX_PLAYER5).getUsername();
+                    bfw.write(usernameP1 + "," + usernameP2 + "," + usernameP3 + "," + usernameP4 + "," + usernameP5 + "\n");
+                }
+            }
+            else{
+                bfw.write("false\n");//There are no players
             }
 
 
@@ -82,8 +96,17 @@ public class Reader {
             bfr = new BufferedReader(fr);
             //clearing existing data
             data.reset();
-            //Loading people data, may be buggy
-            String line=(bfr.readLine());
+            //checking if file is empty
+            String line=bfr.readLine();
+            if(line==null){
+                return false;//unable to read empty file
+            }
+            //Loading people data
+            //checking if there are players
+            if(!line.equals("true")){
+                return false;//no players
+            }
+            line=bfr.readLine();
             int popoulationSize = Integer.parseInt(line);
             //Loading all people
             for(int pe=0;pe<popoulationSize;pe++){
@@ -97,6 +120,11 @@ public class Reader {
                 data.storePersonFromFile(person); //store that person into the database
             }
             //Loading players
+            //checking if there are players
+            line = bfr.readLine();
+            if(!line.equals("true")){
+                return true;//no players therefore no teams
+            }
             line = bfr.readLine();
             int playerCount = Integer.parseInt(line);
             for(int pl=0;pl<playerCount;pl++){
@@ -106,8 +134,8 @@ public class Reader {
                 data.storeNewPlayer(person);
                 //loading stats
                 String name = splitLine[INDEX_NAME];
-                Nationality nationality = Nationality.getNationality(splitLine[INDEX_NATIONALITY]);
-                int age = Integer.parseInt(splitLine[INDEX_AGE]);
+                Nationality nationality = data.querySpecificPerson(name).getNationality();
+                int age = data.querySpecificPerson(name).getAge();
                 int kills = Integer.parseInt(splitLine[INDEX_KILLS]);
                 int assists = Integer.parseInt(splitLine[INDEX_ASSISTS]);
                 int deaths = Integer.parseInt(splitLine[INDEX_DEATHS]);
@@ -117,6 +145,11 @@ public class Reader {
                 data.storePlayerFromFile(player);
             }
             //loading teams
+            //checking if there are players
+            line = bfr.readLine();
+            if(!line.equals("true")){
+                return true;
+            }
             line = bfr.readLine();
             int teamCount = Integer.parseInt(line);
             for(int t=0;t<teamCount;t++){
