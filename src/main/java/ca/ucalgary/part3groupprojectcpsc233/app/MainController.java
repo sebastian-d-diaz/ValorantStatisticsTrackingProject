@@ -156,6 +156,7 @@ public class MainController {
             labelStatus.setText("Unable to Load File :(");
         }
         //refreshing
+        refreshTeamFields();
         refreshPlayerFields();
         refreshPersonFields();
     }
