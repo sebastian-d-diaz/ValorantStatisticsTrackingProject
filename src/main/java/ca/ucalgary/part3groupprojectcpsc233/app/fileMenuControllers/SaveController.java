@@ -28,8 +28,8 @@ public class SaveController {
 
     @FXML
     public void saveState(File file){
-        //Checking if file can be read from
-        if(file.canRead()){
+        //Checking if file can be written to
+        if(file.canWrite()){
             //opening file
             Reader.GUIsave(data,file);
             labelStatus.setLayoutX(750.0);
