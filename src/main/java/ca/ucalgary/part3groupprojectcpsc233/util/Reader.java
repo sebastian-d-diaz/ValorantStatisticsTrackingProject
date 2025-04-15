@@ -32,6 +32,10 @@ public class Reader {
         FileWriter fw = null;
         BufferedWriter bfw = null;
         try{
+            //making file if it doesn't exist
+            if(!file.exists()){
+                file.createNewFile();
+            }
             fw = new FileWriter(file);
             bfw = new BufferedWriter(fw);
             //saving people
