@@ -1,7 +1,6 @@
 package ca.ucalgary.part3groupprojectcpsc233.app;
 
 //importing helper-controllers
-import ca.ucalgary.part3groupprojectcpsc233.app.fileMenuControllers.*;
 
 import ca.ucalgary.part3groupprojectcpsc233.enums.Nationality;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Person;
@@ -83,7 +82,12 @@ public class MainController {
 
     private boolean viewingPerson;
 
+    //Setting up FileChooser for File menu items
+    FileChooser fileChooser = new FileChooser();
+    File initialDirectory = new File(System.getProperty("user.dir")+"/src/exampleSaveFiles");
+
     public void initialize() {
+        fileChooser.setInitialDirectory(initialDirectory);
         inputTitle.setVisible(false);
         inputToolBar.setVisible(false);
         data = new Data();
@@ -99,24 +103,17 @@ public class MainController {
     }
     @FXML
     protected void open_MenuItem(){
-        FileChooser fc = new FileChooser();
-        //Filechooser default directory
-        String initalDirectoryString = System.getProperty("user.dir");
-        File initialDirectory = new File(initalDirectoryString+"/src/exampleSaveFiles");
-        if(initialDirectory.canRead()){
-            fc.setInitialDirectory(initialDirectory);
-        }
+
         //unable to open directory
-        else{
-            initalDirectoryString = System.getProperty("c:/");
-            initialDirectory = new File(initalDirectoryString);
-            fc.setInitialDirectory(initialDirectory);
+        if(!initialDirectory.isDirectory()){
+            initialDirectory = new File(System.getProperty("c:/"));
+            fileChooser.setInitialDirectory(initialDirectory);
         }
         //Getting file
-        fc.setTitle("Open file");
-        File file = fc.showOpenDialog(Open.getParentPopup().getOwnerWindow());
+        fileChooser.setTitle("Open file");
+        File file = fileChooser.showOpenDialog(Open.getParentPopup().getOwnerWindow());
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All files (*.csv)", "*.csv");
-        fc.getExtensionFilters().add(extFilter);
+        fileChooser.getExtensionFilters().add(extFilter);
         //Non-null file case comes first as this is assumed to be the most common case
         if(file!=null){
             Reader.GUIload(data,file);
@@ -134,10 +131,26 @@ public class MainController {
     }
     @FXML
     protected void save_MenuItem(){
+        //Checking if there is data
+        if(data.queryAllPersons()==null){
+            labelStatus.setLayoutX(700.0);
+            labelStatus.setText("No data entered, unable to save :(");
+            return;
+        }
         //If save file exists and therefore "save" functionality can be used
-        if(saveFile.canWrite()){
-            SaveController controller = new SaveController(data);
-            controller.saveState(saveFile);
+        if(saveFile!=null&&saveFile.canWrite()){
+            //Checking if file can be written to
+            if(saveFile.canWrite()){
+                //using reader to save file
+                Reader.GUIsave(data,saveFile);
+                labelStatus.setLayoutX(750.0);
+                labelStatus.setText("File Saved Successfully :)");
+
+            }//unable to read from file
+            else{
+                labelStatus.setLayoutX(760.0);
+                labelStatus.setText("Unable to Save File :(");
+            }
         }
         //If save file does not exist and therefore "save as functionality must be used"
         else{
@@ -146,9 +159,36 @@ public class MainController {
     }
     @FXML
     protected void saveAs_MenuItem(){
-
-
-
+        //Checking if there is data
+        if(data.queryAllPersons()==null){
+            labelStatus.setLayoutX(700.0);
+            labelStatus.setText("No data entered, unable to save :(");
+            return;
+        }
+        fileChooser.setTitle("Save file as");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+        //displaying popup and getting file
+        File saveFile = fileChooser.showSaveDialog(SaveAs.getParentPopup().getOwnerWindow());
+        //checking if file can be written to
+        if(saveFile!=null){
+            //Saving file
+            Boolean savedStatus = Reader.GUIsave(data, saveFile);
+            //Reader was able to successfully save file
+            if(savedStatus){
+                labelStatus.setLayoutX(750.0);
+                labelStatus.setText("File saved Successfully :)");
+            }
+            //Reader was not able to save file
+            else{
+                labelStatus.setLayoutX(760.0);
+                labelStatus.setText("Unable to save File :(");
+            }
+        }
+        else{
+            labelStatus.setLayoutX(760.0);
+            labelStatus.setText("Unable to save File :(");
+        }
     }
     @FXML
     protected void quit_MenuItem(){
