@@ -115,6 +115,9 @@ public class MainController {
     FileChooser fileChooser = new FileChooser();
     File initialDirectory = new File(System.getProperty("user.dir")+"/src/exampleSaveFiles");
 
+    /**
+     * function runs on start, initializes state of specific GUI items
+     */
     public void initialize() {
         fileChooser.setInitialDirectory(initialDirectory);
         data = new Data();
@@ -222,6 +225,10 @@ public class MainController {
     protected void quit_MenuItem(){
         Platform.exit();
     }
+
+    /**
+     * popup window that displays information about the creators of the project to the user
+     */
     @FXML
     void aboutPopup(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -232,6 +239,9 @@ public class MainController {
         alert.show();
     }
 
+    /**
+     * popup window that displays the controls of the program to the user
+     */
     @FXML
     void controlsPopout(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -298,12 +308,17 @@ public class MainController {
             textAreaAsia.appendText(person.toString() + "\n");
         }
     }
+
+    /**
+     * used to add a person to the database using a button
+     * @throws IOException Error that occurs if something goes wrong
+     */
     @FXML
     void addPerson() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPerson.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPerson.fxml")); //load the fxml for add person
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 400, 400);
+            scene = new Scene(fxmlLoader.load(), 400, 400); //try to create a new window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -489,12 +504,15 @@ public class MainController {
         }
     }
 
+    /**
+     * function that allows user to add/ register a player into the database
+     */
     @FXML
     void addPlayer(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml")); //load fxml for add player
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 241, 246);
+            scene = new Scene(fxmlLoader.load(), 300, 300); // try to create popup window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -504,14 +522,18 @@ public class MainController {
         stage.setTitle("Add New Player");
         stage.setScene(scene);
         stage.showAndWait();
+        refreshPlayerFields(); //refresh text boxes
     }
 
+    /**
+     * function that allows user to add kills to a registered player
+     */
     @FXML
     void addKills(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddKills.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddKills.fxml")); //load fxml file for add kills
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 262, 309);
+            scene = new Scene(fxmlLoader.load(), 300, 300); //try to create popup window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -521,15 +543,18 @@ public class MainController {
         stage.setTitle("Add a Players Kills");
         stage.setScene(scene);
         stage.showAndWait();
-        refreshPlayerFields();
+        refreshPlayerFields(); //refresh text boxes
     }
 
+    /**
+     * function that allows user to add assists to a registered player
+     */
     @FXML
     void addAssists(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddAssists.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddAssists.fxml")); //load the fxml for add assists
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 262, 309);
+            scene = new Scene(fxmlLoader.load(), 300, 300); //try to create the popup window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -539,15 +564,18 @@ public class MainController {
         stage.setTitle("Add a Players Assists");
         stage.setScene(scene);
         stage.showAndWait();
-        refreshPlayerFields();
+        refreshPlayerFields(); //refresh text boxes
     }
 
+    /**
+     * function that allows user to add deaths to a registered player
+     */
     @FXML
     void addDeaths(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddDeaths.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddDeaths.fxml")); //load the fxml file for add deaths
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 262, 309);
+            scene = new Scene(fxmlLoader.load(), 300, 300); //try to create the popup window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -557,15 +585,18 @@ public class MainController {
         stage.setTitle("Add a Players Deaths");
         stage.setScene(scene);
         stage.showAndWait();
-        refreshPlayerFields();
+        refreshPlayerFields(); //refresh the textboxes
     }
 
+    /**
+     * function that allows user to add ACS to a player that is registered
+     */
     @FXML
     void addACS(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddACS.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddACS.fxml")); //load the fxml file for add ACS
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 262, 309);
+            scene = new Scene(fxmlLoader.load(), 300, 300); //try to create popup window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -575,15 +606,18 @@ public class MainController {
         stage.setTitle("Add a Players ACS");
         stage.setScene(scene);
         stage.showAndWait();
-        refreshPlayerFields();
+        refreshPlayerFields(); //refresh text boxes
     }
 
+    /**
+     * function that allows user to add ADR to a registered player
+     */
     @FXML
     void addADR(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddADR.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddADR.fxml")); //load the fxml for add ADR
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 262, 309);
+            scene = new Scene(fxmlLoader.load(), 300, 300); //try to create the popup window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -593,15 +627,18 @@ public class MainController {
         stage.setTitle("Add a Players ADR");
         stage.setScene(scene);
         stage.showAndWait();
-        refreshPlayerFields();
+        refreshPlayerFields(); //refresh text boxes
     }
 
+    /**
+     * popup window that allows the user to view various highest stats out of the players in the database
+     */
     @FXML
     void showHighestStats(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("HighestStats.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("HighestStats.fxml")); //load the fxml file for highest stats
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene = new Scene(fxmlLoader.load(), 600, 400); //try to create the popup window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -611,7 +648,7 @@ public class MainController {
         stage.setTitle("Highest Stats");
         stage.setScene(scene);
         stage.showAndWait();
-        refreshPlayerFields();
+        refreshPlayerFields(); //refresh text boxes
     }
     @FXML
     void recommendedTeam(){
@@ -641,12 +678,15 @@ public class MainController {
         }
     }
 
+    /**
+     * function that displays players over a certain age
+     */
     @FXML
     void showOverAge(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GetOverAge.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GetOverAge.fxml")); //load the fxml file for get over age
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load(), 600, 500);
+            scene = new Scene(fxmlLoader.load(), 600, 500); //try to create popup window
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
