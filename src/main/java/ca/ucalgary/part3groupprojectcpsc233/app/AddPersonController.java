@@ -33,6 +33,12 @@ public class AddPersonController {
     void add(ActionEvent event) {
         String username = name.getText().stripTrailing();
         Nationality nat = getNationality(nationality.getText());
+        //checking nationality
+        if(nat==null){
+            status.setText("Failed, unknown nationality");
+            return;
+        }
+        //checking Age
         try {
             int personAge = Integer.parseInt(age.getText());//add error checking after
             data.storeNewPerson(username,nat,personAge);
