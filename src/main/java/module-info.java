@@ -8,4 +8,5 @@ module ca.ucalgary.part3groupprojectcpsc233 {
     exports ca.ucalgary.part3groupprojectcpsc233.enums;
     exports ca.ucalgary.part3groupprojectcpsc233.objects;
     exports ca.ucalgary.part3groupprojectcpsc233.util;
+    exports ca.ucalgary.part3groupprojectcpsc233.comparators;
 }
