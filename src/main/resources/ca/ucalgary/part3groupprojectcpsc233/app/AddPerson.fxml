@@ -14,5 +14,6 @@
       <Label prefHeight="26.0" prefWidth="94.0" text="Age" />
       <TextField fx:id="age" />
       <Button mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="731.0" text="Add" />
+      <Label fx:id="status" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="314.0" text="Status" textAlignment="RIGHT" />
    </children>
 </VBox>
