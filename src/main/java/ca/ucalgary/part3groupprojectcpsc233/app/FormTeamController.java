@@ -74,13 +74,18 @@ public class FormTeamController {
             validTeam=false;
             Status5.setText("Invalid name");
         }
-        if(validTeam==true){
+        if(validTeam){
             ArrayList<String>players = new ArrayList<>();
             players.add(name1);
             players.add(name2);
             players.add(name3);
             players.add(name4);
             players.add(name5);
+            Status1.setText("Added!");
+            Status2.setText("Added!");
+            Status3.setText("Added!");
+            Status4.setText("Added!");
+            Status5.setText("Added!");
 
             data.storeNewTeam(teamName,players);
 

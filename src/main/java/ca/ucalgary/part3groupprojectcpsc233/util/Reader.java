@@ -26,6 +26,11 @@ public class Reader {
     public static final int INDEX_PLAYER3 = 3;
     public static final int INDEX_PLAYER4 = 4;
     public static final int INDEX_PLAYER5 = 5;
+    public static final int INDEX_TEAM_MEMBER1 = 0;
+    public static final int INDEX_TEAM_MEMBER2 = 1;
+    public static final int INDEX_TEAM_MEMBER3 = 2;
+    public static final int INDEX_TEAM_MEMBER4 = 3;
+    public static final int INDEX_TEAM_MEMBER5 = 4;
 
     public static boolean GUIsave(Data data, File file){
         //Checking if there is data
@@ -48,7 +53,7 @@ public class Reader {
             //saving Players
             ArrayList<Player> players = data.queryAllPlayers();
             if(players!=null) {//checking if there are players
-                bfw.write("true+\n");
+                bfw.write("true\n");
                 bfw.write(players.size() + "\n");//Number of players
                 for (Player player : players) {
                     bfw.write(player.getUsername() + "," + player.getAge() + "," + player.getKills() + "," + player.getAssists() + "," + player.getDeaths() + "," + player.getAcs() + "," + player.getAdr() + "\n");//"username,age,kills,assists,deaths,acs,adr\n"
@@ -65,11 +70,11 @@ public class Reader {
                 for (Team team : teams) {
                     bfw.write(team.getTeamName() + ",");//writing team name, note a newline character is not present here
                     ArrayList<Player> playersOnTeam = team.getTeamMembers();
-                    String usernameP1 = playersOnTeam.get(INDEX_PLAYER1).getUsername();
-                    String usernameP2 = playersOnTeam.get(INDEX_PLAYER2).getUsername();
-                    String usernameP3 = playersOnTeam.get(INDEX_PLAYER3).getUsername();
-                    String usernameP4 = playersOnTeam.get(INDEX_PLAYER4).getUsername();
-                    String usernameP5 = playersOnTeam.get(INDEX_PLAYER5).getUsername();
+                    String usernameP1 = playersOnTeam.get(INDEX_TEAM_MEMBER1).getUsername();
+                    String usernameP2 = playersOnTeam.get(INDEX_TEAM_MEMBER2).getUsername();
+                    String usernameP3 = playersOnTeam.get(INDEX_TEAM_MEMBER3).getUsername();
+                    String usernameP4 = playersOnTeam.get(INDEX_TEAM_MEMBER4).getUsername();
+                    String usernameP5 = playersOnTeam.get(INDEX_TEAM_MEMBER5).getUsername();
                     bfw.write(usernameP1 + "," + usernameP2 + "," + usernameP3 + "," + usernameP4 + "," + usernameP5 + "\n");
                 }
             }
@@ -83,7 +88,6 @@ public class Reader {
         }
         finally{
             try{
-                fw.close();
                 bfw.close();
             }catch(IOException e){
                 return false;
