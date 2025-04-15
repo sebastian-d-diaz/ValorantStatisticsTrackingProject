@@ -49,6 +49,7 @@
                 <Menu mnemonicParsing="false" text="Search Based on:">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#showHighestStats" text="Highest Stats" />
+                        <MenuItem mnemonicParsing="false" onAction="#showOverAge" text="players Over Age" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="View:">
@@ -56,13 +57,6 @@
                         <MenuItem mnemonicParsing="false" onAction="#changeMainViewToPeople" text="People" />
                         <MenuItem mnemonicParsing="false" onAction="#changeMainViewToPlayers" text="Players Based on Nationality" />
                         <MenuItem mnemonicParsing="false" onAction="#changeMainViewToTeams" text="based on Teams" />
-                        <Menu mnemonicParsing="false" text="all players on a Team:">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
-                            </items>
-                        </Menu>
-                        <MenuItem mnemonicParsing="false" text="players and Stats" />
-                        <MenuItem mnemonicParsing="false" onAction="#showOverAge" text="players Over Age" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Get Recommended Team Based On:">
