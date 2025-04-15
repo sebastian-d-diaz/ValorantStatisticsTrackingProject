@@ -13,28 +13,31 @@ import java.util.ArrayList;
 public class GetOverAgeController {
 
     @FXML
-    private Label status;
+    private Label status; //status of the window
 
     @FXML
-    private TextField inputAge;
+    private TextField inputAge; //input field for age
 
     @FXML
-    private TextArea textArea;
+    private TextArea textArea; //text display for players over X age
 
     private Data data;
 
-    public void setData(Data data) {
+    public void setData(Data data) { //creating instance of data.java
         this.data = data;
     }
 
+    /**
+     * function used to change the displayed text for players over a certain age
+     * uses a user inputted age and finds all players over that age
+     */
     @FXML
     void find() {
-        String playersOver = "";
+        String playersOver = ""; //initialize string
         try {
-            int age = Integer.parseInt(inputAge.getText());
-            data.findPeopleOverAge(age);
-            playersOver += "All players over " + age + ":\n";
-            ArrayList<Person> peopleOverAge = data.findPeopleOverAge(age); //finds and store player who are over inputted age
+            int age = Integer.parseInt(inputAge.getText()); //get inputted age
+            playersOver += "All players over " + age + ":\n"; //format the displaying of names
+            ArrayList<Person> peopleOverAge = this.data.findPeopleOverAge(age); //finds and store player who are over inputted age
             if (peopleOverAge == null) { //no player over inputted age exist
                 textArea.setText("No Players Found");
                 status.setText("Displaying Players");
@@ -45,7 +48,7 @@ public class GetOverAgeController {
                 textArea.setText(playersOver);
                 status.setText("Displaying Players");
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) { //invalid age integer provided
             status.setText("ERROR, Age must be an Integer");
         }
     }
