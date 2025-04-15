@@ -95,12 +95,28 @@ public class MainController {
     }
     @FXML
     protected void open_MenuItem(){
+
+        //refreshing scene
+
         FileChooser fc = new FileChooser();
+        //Filechooser default directory
+        String initalDirectoryString = System.getProperty("user.dir");
+        File initialDirectory = new File(initalDirectoryString+"/src/exampleSaveFiles");
+        if(initialDirectory.canRead()){
+            fc.setInitialDirectory(initialDirectory);
+
+        }
+        //unable to open directory
+        else{
+            initalDirectoryString = System.getProperty("c:/");
+            initialDirectory = new File(initalDirectoryString+"/src/exampleSaveFiles");
+            fc.setInitialDirectory(initialDirectory);
+        }
+        //Getting file
         fc.setTitle("Open file");
         File file = fc.showOpenDialog(Open.getParentPopup().getOwnerWindow());
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All files (*.csv)", "*.csv");
-        fc.getExtensionFilters().add(extFilter);
-        //Non-null file case comes first as this is assumed to be the most common case
+        fc.getExtensionFilters().add(extFilter);        //Non-null file case comes first as this is assumed to be the most common case
         if(file!=null){
             Reader.GUIload(data,file);
             labelStatus.setLayoutX(750.0);
