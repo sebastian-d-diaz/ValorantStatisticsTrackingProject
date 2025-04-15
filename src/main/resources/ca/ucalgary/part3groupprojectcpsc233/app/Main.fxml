@@ -43,7 +43,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#addADR" text="Enter ADR" />
                         <MenuItem mnemonicParsing="false" onAction="#addACS" text="Enter ACS" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Form a Team" />
+                        <MenuItem mnemonicParsing="false" onAction="#FormATeam" text="Form a Team" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Search Based on:">

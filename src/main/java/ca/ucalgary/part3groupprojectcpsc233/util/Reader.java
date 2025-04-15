@@ -154,7 +154,6 @@ public class Reader {
             if(line.equals("false")){
                 return true;
             }
-            System.out.println(line);
             line = bfr.readLine();
             int teamCount = Integer.parseInt(line);
             for(int t=0;t<teamCount;t++){
