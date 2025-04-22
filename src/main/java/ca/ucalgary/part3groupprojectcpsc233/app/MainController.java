@@ -11,6 +11,7 @@ import ca.ucalgary.part3groupprojectcpsc233.objects.Person;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Player;
 import ca.ucalgary.part3groupprojectcpsc233.objects.Team;
 import ca.ucalgary.part3groupprojectcpsc233.util.Reader;
+import javafx.animation.Animation;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -752,7 +753,7 @@ public class MainController {
             throw new RuntimeException(e);
         }
         FormTeamController controller = fxmlLoader.getController();
-        controller.setData(data);
+        controller.setData(data, labelStatus);
         Stage stage = new Stage();
         stage.setTitle("Form a Team");
         stage.setScene(scene);
