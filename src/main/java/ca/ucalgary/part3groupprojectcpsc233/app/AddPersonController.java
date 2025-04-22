@@ -37,6 +37,11 @@ public class AddPersonController {
     void add(ActionEvent event) {
         String username = name.getText().stripTrailing(); //get inputted name
         Nationality nat = getNationality(nationality.getText());//get inputted nationality
+        //checking name
+        if(username==null){
+            status.setText("Failed, null username");
+            return;
+        }
         //checking nationality
         if(nat==null){ //nationality doesn't exist
             status.setText("Failed, unknown nationality");
