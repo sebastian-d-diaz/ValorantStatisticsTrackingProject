@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -33,6 +34,64 @@ public class MainController {
     //setters
     public void setData(Data data){
         this.data=data;
+    }
+    public void setWidth(double oldWidth,double width){
+        this.width=width;
+        //shifting status label horizontally
+        labelStatus.setText("status");
+        labelStatus.setLayoutX(width-80);
+        //shifting textAreas horizontally
+        labelCanada.setLayoutX(width*0.2);
+        textAreaCanada.setLayoutX(width*0.2);
+
+        labelEurope.setLayoutX(width*0.45);
+        textAreaEurope.setLayoutX(width*0.45);
+
+        labelArgentina.setLayoutX(width*0.7);
+        textAreaArgentina.setLayoutX(width*0.7);
+
+        labelAsia.setLayoutX(width*0.2);
+        textAreaAsia.setLayoutX(width*0.2);
+
+        labelUSA.setLayoutX(width*0.45);
+        textAreaUSA.setLayoutX(width*0.45);
+
+        labelChile.setLayoutX(width*0.7);
+        textAreaChile.setLayoutX(width*0.7);
+
+        labelBrazil.setLayoutX(width*0.2);
+        textAreaBrazil.setLayoutX(width*0.2);
+
+        RecommendedBox.setLayoutX(width*0.6);
+
+    }
+    public void setHeight(double oldWidth, double height){
+        this.height=height;
+        //shifting status label horizontally
+        labelStatus.setText("status");
+        labelStatus.setLayoutY(height-100);
+        //shifting textAreas vertically
+        textAreaCanada.setLayoutY(height*0.05);//For the first three textboxes, the labels are left as is because there is no reason to  move them
+
+        textAreaEurope.setLayoutY(height*0.05);
+
+        textAreaArgentina.setLayoutY(height*0.05);
+
+        labelAsia.setLayoutY(height*0.30);
+
+        textAreaAsia.setLayoutY(height*0.35);
+
+        labelUSA.setLayoutY(height*0.30);
+        textAreaUSA.setLayoutY(height*0.35);
+
+        labelChile.setLayoutY(height*0.3);
+        textAreaChile.setLayoutY(height*0.35);
+
+        labelBrazil.setLayoutY(height*0.6);
+        textAreaBrazil.setLayoutY(height*0.65);
+
+        RecommendedBox.setLayoutY(height*0.65);
+
     }
     //File MenuItems
     @FXML
@@ -76,18 +135,32 @@ public class MainController {
     private TextArea textAreaChile;
 
     @FXML
-    private Label labelChile;
+    private Label labelCanada;
+
+    @FXML
+    private Label labelEurope;
 
     @FXML
     private Label labelArgentina;
 
     @FXML
-    private Label labelEurope;
+    private Label labelAsia;
+
+    @FXML
+    private Label labelUSA;
+
+    @FXML
+    private Label labelChile;
+
+    @FXML
+    private Label labelBrazil;
 
 
     // items for reccommendedTeam
     @FXML
     private MenuItem GetRecommendedTeam;
+    @FXML
+    private VBox RecommendedBox;
     @FXML
     private Label Recommended1;
     @FXML
@@ -98,6 +171,9 @@ public class MainController {
     private Label Recommended4;
     @FXML
     private Label Recommended5;
+
+    private double height;
+    private double width;
 
     // booleans tracking what view a user is currently in
     private boolean viewingPerson;
@@ -116,6 +192,7 @@ public class MainController {
         data = new Data();
         viewingPerson = true;
         viewingTeam = false;
+
     }
     //null when no save file exists, used to determine if save should use save or "save as" functionality
     private File saveFile = null;
@@ -124,13 +201,12 @@ public class MainController {
         //Wiping saveFile path
         saveFile=null;
         data.reset();
-        //refreshing
-        labelStatus.setLayoutX(800.0);
-        labelStatus.setText("Created New File");
+
         //refreshing
         refreshPlayerFields();
         refreshPersonFields();
-
+        labelStatus.setLayoutX(width-120.0);
+        labelStatus.setText("Created New File");
     }
 
     /**
@@ -152,12 +228,12 @@ public class MainController {
         if(file!=null){
             Reader.GUIload(data,file);
             saveFile=file;
-            labelStatus.setLayoutX(750.0);
+            labelStatus.setLayoutX(width-150.0);
             labelStatus.setText("File Loaded Successfully :)");
         }
         //If some issue occurred
         else{
-            labelStatus.setLayoutX(760.0);
+            labelStatus.setLayoutX(width-140.0);
             labelStatus.setText("Unable to Load File :(");
         }
         //refreshing
@@ -173,7 +249,7 @@ public class MainController {
     protected void save_MenuItem(){
         //Checking if there is data
         if(data.queryAllPersons()==null){
-            labelStatus.setLayoutX(700.0);
+            labelStatus.setLayoutX(width-190.0);
             labelStatus.setText("No data entered, unable to save :(");
             return;
         }
@@ -181,7 +257,7 @@ public class MainController {
         if(saveFile!=null&&saveFile.canWrite()){
             //using reader to save file
             Reader.GUIsave(data,saveFile);
-            labelStatus.setLayoutX(750.0);
+            labelStatus.setLayoutX(width-130);
             labelStatus.setText("File Saved Successfully :)");
         }
         //If save file does not exist and therefore "save as functionality must be used"
@@ -197,7 +273,7 @@ public class MainController {
     protected void saveAs_MenuItem(){
         //Checking if there is data
         if(data.queryAllPersons()==null){
-            labelStatus.setLayoutX(700.0);
+            labelStatus.setLayoutX(width-190);
             labelStatus.setText("No data entered, unable to save :(");
             return;
         }
@@ -221,18 +297,18 @@ public class MainController {
             boolean savedStatus = Reader.GUIsave(data, file);
             //Reader was able to successfully save file
             if(savedStatus){
-                labelStatus.setLayoutX(750.0);
+                labelStatus.setLayoutX(width-180);
                 labelStatus.setText("File saved Successfully :)");
                 saveFile=file;
             }
             //Reader was not able to save file
             else{
-                labelStatus.setLayoutX(760.0);
+                labelStatus.setLayoutX(width-170);
                 labelStatus.setText("Unable to save File :(");
             }
         }
         else{
-            labelStatus.setLayoutX(760.0);
+            labelStatus.setLayoutX(width-170);
             labelStatus.setText("Unable to save File :(");
         }
     }
@@ -287,7 +363,7 @@ public class MainController {
 
         ArrayList<Person> canadians = data.findPeopleWithNationality("Canada");
         if (canadians == null){
-            labelStatus.setLayoutX(740.0);
+            labelStatus.setLayoutX(width-170);
             labelStatus.setText("No people found in database.");
             return;
         }
@@ -696,7 +772,7 @@ public class MainController {
         ArrayList<Player> players = data.queryAllPlayers();
         //If there aren't enough players, anticipating NullPointerException
         if(players==null){
-            labelStatus.setLayoutX(770.0);
+            labelStatus.setLayoutX(width-130);
             labelStatus.setText("No players exist; need 5");
         }
         else if(data.queryAllPlayers().size()>=5){
@@ -707,14 +783,14 @@ public class MainController {
             Recommended4.setText(" "+recommended[3].getUsername()+"                  "+recommended[3].getAcs());
             Recommended5.setText(" "+recommended[4].getUsername()+"                  "+recommended[4].getAcs());
 
-            labelStatus.setLayoutX(730.0);
+            labelStatus.setLayoutX(width-170);
             labelStatus.setText("Recommended Team Found");
         }
         //not enough players
         else{
             //Anticipating NullPointerException
 
-            labelStatus.setLayoutX(740.0);
+            labelStatus.setLayoutX(width-160);
             labelStatus.setText("Only "+players.size()+" players exist; need 5");
         }
     }

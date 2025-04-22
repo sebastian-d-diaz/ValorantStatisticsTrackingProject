@@ -23,12 +23,17 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
         MainController controller = fxmlLoader.getController();
+
+        stage.widthProperty().addListener((width,oldValue,newValue)->{controller.setWidth((double)oldValue,(double)newValue);});
+        stage.heightProperty().addListener((width,oldValue,newValue)->{controller.setHeight((double)oldValue,(double)newValue);});
         if (file != null && file.exists()){
             Data data = new Data();
             Reader.GUIload(data, file);
             controller.setData(data);
             controller.refreshPersonFields();
+
         }
+
         stage.setTitle("Valorant Esports Statistics Tracker");
         stage.setScene(scene);
         stage.show();
