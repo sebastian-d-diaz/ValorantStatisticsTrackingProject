@@ -57,9 +57,11 @@ public class Reader {
                 if(player!=null){
                     bfw.write("T"+","+player.getKills()+","+player.getAssists()+","+player.getDeaths()+","+player.getAcs()+","+player.getAdr());
                     //if that player is on a team this is very inefficient, but it is best to have the inefficiency here instead of elsewhere, where it would have to be to allow for optimization here
-                    for(Team team:teams){
-                        if(team.getTeamMembers().contains(player)){
-                            bfw.write(","+team.getTeamName());//comma is here to allow for a player to be in any number of teams
+                    if(teams!=null) {
+                        for (Team team : teams) {
+                            if (team.getTeamMembers().contains(player)) {
+                                bfw.write("," + team.getTeamName());//comma is here to allow for a player to be in any number of teams
+                            }
                         }
                     }
                     //Will be used if the player is a team or not
