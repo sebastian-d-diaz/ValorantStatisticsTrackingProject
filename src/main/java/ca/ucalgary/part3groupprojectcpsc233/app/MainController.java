@@ -139,9 +139,9 @@ public class MainController {
     protected void open_MenuItem(){
         //unable to open default directory
         if(!initialDirectory.isDirectory()){
-            initialDirectory = new File(System.getProperty("c:/"));
-            fileChooser.setInitialDirectory(initialDirectory);
+            initialDirectory = new File(System.getProperty("user.home"));
         }
+        fileChooser.setInitialDirectory(initialDirectory);
         //Getting file
         fileChooser.setTitle("Open file");
         File file = fileChooser.showOpenDialog(Open.getParentPopup().getOwnerWindow());
@@ -203,6 +203,15 @@ public class MainController {
         fileChooser.setTitle("Save file as");
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("All files (*.csv)", "*.csv");
         fileChooser.getExtensionFilters().add(extFilter);
+
+        File initialDirectory = new File(System.getProperty("user.dir") + "/src/exampleSaveFiles");
+
+        // setting a valid initial directory, vital for use of JAR file
+        if (initialDirectory.exists() && initialDirectory.isDirectory()) {
+            fileChooser.setInitialDirectory(initialDirectory);
+        } else {
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        }
         //displaying popup and getting file
         File file = fileChooser.showSaveDialog(SaveAs.getParentPopup().getOwnerWindow());
         //checking if file can be written to
