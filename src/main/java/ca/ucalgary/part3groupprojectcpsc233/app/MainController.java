@@ -41,26 +41,26 @@ public class MainController {
         labelStatus.setText("status");
         labelStatus.setLayoutX(width-80);
         //shifting textAreas horizontally
-        labelCanada.setLayoutX(width*0.2);
-        textAreaCanada.setLayoutX(width*0.2);
+        labelCanada.setLayoutX(width*0.22);
+        textAreaCanada.setLayoutX(width*0.22);
 
-        labelEurope.setLayoutX(width*0.45);
-        textAreaEurope.setLayoutX(width*0.45);
+        labelEurope.setLayoutX(width*0.49);
+        textAreaEurope.setLayoutX(width*0.49);
 
-        labelArgentina.setLayoutX(width*0.7);
-        textAreaArgentina.setLayoutX(width*0.7);
+        labelArgentina.setLayoutX(width*0.76);
+        textAreaArgentina.setLayoutX(width*0.76);
 
-        labelAsia.setLayoutX(width*0.2);
-        textAreaAsia.setLayoutX(width*0.2);
+        labelAsia.setLayoutX(width*0.22);
+        textAreaAsia.setLayoutX(width*0.22);
 
-        labelUSA.setLayoutX(width*0.45);
-        textAreaUSA.setLayoutX(width*0.45);
+        labelUSA.setLayoutX(width*0.49);
+        textAreaUSA.setLayoutX(width*0.49);
 
-        labelChile.setLayoutX(width*0.7);
-        textAreaChile.setLayoutX(width*0.7);
+        labelChile.setLayoutX(width*0.76);
+        textAreaChile.setLayoutX(width*0.76);
 
-        labelBrazil.setLayoutX(width*0.2);
-        textAreaBrazil.setLayoutX(width*0.2);
+        labelBrazil.setLayoutX(width*0.22);
+        textAreaBrazil.setLayoutX(width*0.22);
 
         RecommendedBox.setLayoutX(width*0.6);
 
@@ -514,30 +514,22 @@ public class MainController {
         // once again change visibility of certain textfields to match
         teamField.setDisable(false);
         teamField.setVisible(true);
-
+        teamField.setMaxHeight(height*1.5);
+        teamField.setMaxWidth(width*0.21);
         textAreaCanada.setDisable(false);
-        textAreaCanada.setVisible(true);
 
         textAreaEurope.setDisable(false);
-        textAreaEurope.setVisible((true));
-        labelEurope.setText("");
 
         textAreaUSA.setDisable(true);
-        textAreaUSA.setVisible(false);
 
         textAreaChile.setDisable(true);
-        textAreaChile.setVisible(false);
-        labelChile.setText("");
+
 
         textAreaAsia.setDisable(true);
-        textAreaAsia.setVisible(false);
 
         textAreaBrazil.setDisable(true);
-        textAreaBrazil.setVisible(false);
 
         textAreaArgentina.setDisable(true);
-        textAreaArgentina.setVisible(false);
-        labelArgentina.setText("");
 
         viewingPerson = false;
         viewingTeam = true;
@@ -557,6 +549,7 @@ public class MainController {
         ArrayList<Team> allTeams = data.queryAllTeams();
 
         if (allTeams == null){
+            labelStatus.setLayoutX(width-150);
             labelStatus.setText("No teams found.");
         }
         else{
@@ -564,7 +557,7 @@ public class MainController {
             for (Team team : allTeams){
                 teamField.appendText(team.getTeamName() + ": ");
                 for (Player players : team.getTeamMembers()){
-                    teamField.appendText(players.getUsername());
+                    teamField.appendText(" "+players.getUsername());
                 }
                 teamField.appendText("\n");
             }
