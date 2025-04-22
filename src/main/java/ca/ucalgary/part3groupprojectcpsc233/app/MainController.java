@@ -765,7 +765,7 @@ public class MainController {
         ArrayList<Player> players = data.queryAllPlayers();
         //If there aren't enough players, anticipating NullPointerException
         if(players==null){
-            labelStatus.setLayoutX(width-130);
+            labelStatus.setLayoutX(width-150);
             labelStatus.setText("No players exist; need 5");
         }
         else if(data.queryAllPlayers().size()>=5){
@@ -783,7 +783,7 @@ public class MainController {
         else{
             //Anticipating NullPointerException
 
-            labelStatus.setLayoutX(width-160);
+            labelStatus.setLayoutX(width-150);
             labelStatus.setText("Only "+players.size()+" players exist; need 5");
         }
     }
