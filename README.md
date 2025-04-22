@@ -17,8 +17,9 @@ Uses Java 23.0.1 JDK, JavaFX 23.0.2 SDK, JUnit 5.8.1
 
 If you installed JDK windows your execution would look like this for the jar file
 
-*insert cmd line here*
+`java --module-path "PATHTOJAVAFX" --add-modules javafx.controls,javafx.fxml -jar CPSC233W25A3.jar`
 
+where "PATHTOJAVAFX" is replaced by your path to the `lib` folder in your JavaFX SDK.
 ## Class Information
 Data: 
 
